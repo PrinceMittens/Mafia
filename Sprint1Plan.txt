@@ -1,0 +1,44 @@
+Sprint 1 - Create a live updating thread
+
+(20) As a Game Mod, I want to be able to create games so that other people can play on the forums; //create threads (Priority 1)
+	Create a game thread table (3 hours)
+	Allow users to post (2 hours)
+	Live updating - sending text data into the server, and the server updates the site with visual data based on this text data with no reload. (15 hours)
+Total hours: 20 hours
+
+(5) As a Forum User, I want to be able to create an account and username so that I can access the forum. (Priority 1)
+	Create a users table (2 hours)
+	User interface for creating an account (2 hour)
+Total hours: 4 hours
+
+(5) As a User, I need to be able to navigate into specific forum categories so that I can get to the games or threads I want to view. (Priority 1)
+	Create thread table (2 hours)
+	List threads as links/buttons (2 hours)
+Total hours: 4 hours
+
+(Priority 3) As a Player, I want to be able to sign up for games so that I can play games (Priority 1); //system updates text inside existing threads (via button?)
+	Create a game thread table (2 hours)
+	Setup/connect list of threads to their correct game threads (1 hour)
+Total hours: 3 hours
+
+(8) As a Forum User, I need to be able to make posts inside threads so that I can talk to other players and users. (Priority 1)
+	Create posts table (2 hours)
+	Live updating - sending text data into the server, and the server updates the site with visual data based on this text data with no reload. (15 hours)
+Total hours: 17 hours
+
+(1) As a Forum User, I want to be able to view created games and threads so that I can participate in information exchange and browse the games that I may or may not want to spectate or play (Priority 1)
+	Create thread table (2 hours)
+	List threads as links/buttons (2 hours)
+Total hours: 4 hours
+
+Team Roles:
+Howard Ting: Product Owner, Developer
+Philip Toy: Scrum Master, Developer, Database
+Jason Lee: Developer
+
+
+Howard Ting: User story 3, task b
+Philip Toy: User story 3, task a
+Jason Lee: 
+
+Scrum Schedule: Tue-Thurs 6 pm to whenever (minimum)
