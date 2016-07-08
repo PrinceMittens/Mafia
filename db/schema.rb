@@ -13,6 +13,8 @@
 ActiveRecord::Schema.define(version: 20160708035222) do
 
   create_table "posts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at", null: false
@@ -20,6 +22,7 @@ ActiveRecord::Schema.define(version: 20160708035222) do
   end
 
   create_table "topics", force: :cascade do |t|
+    t.integer  "user_id"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at", null: false

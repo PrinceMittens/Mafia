@@ -2,8 +2,15 @@ Rails.application.routes.draw do
   
   root "example_pages#home"
   
-  get  '/help',    to: 'example_pages#help'
-  get  '/about',   to: 'example_pages#about'
+  get  '/help',                         to: 'example_pages#help'
+  get  '/about',                        to: 'example_pages#about'
+  get  '/admin',                        to: 'admin#manage'
+  get  '/admin/create_user'
+  get  '/admin/delete_user/:id',        to: 'admin#delete_user'
+  get  '/admin/create_topic'
+  get  '/admin/delete_topic/:id',       to: 'admin#delete_topic'
+  get  '/admin/create_post'
+  get  '/admin/delete_post/:id',        to: 'admin#delete_post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
