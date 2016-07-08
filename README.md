@@ -10,12 +10,16 @@ for compatibility, make sure to run 'bundle update' and 'bundle install' after c
 * User, Topic, Post tables added
 ```
 the word 'Thread' is a reserved word in Rails, so changed it to 'Topic'
-after running 'rails db:migrate', you can download the file db/development.sqlite3 and open it with 'DB Browser for SQLite' for more details
+after running 'rails db:migrate', you can download the file db/development.sqlite3
+and open it with 'DB Browser for SQLite' for more details
+also look at:
+db/migrate/...
+app/models/*.rb
 ```
 * Temporary html pages
 ```
 made some very basic example html pages to start working with:
-app/views/example_pages/
+app/views/example_pages/...
 app/views/layouts/_example_header.html.erb
 ```
 * 'Admin' page
