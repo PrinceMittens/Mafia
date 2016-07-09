@@ -1,0 +1,34 @@
+<html>
+<head>Time<title>
+</title>
+</head>
+<script>
+var gametime = 60,
+hours,
+minutes,
+seconds;
+ID = window.setTimeout("timeupdate();", 1000);
+function timeupdate() {
+	if (gametime != 0) {
+		gametime--;
+		hours = Math.floor(gametime/3600);
+		minutes = Math.floor(gametime/60) - (hours*60);
+		if (minutes != 0) seconds = gametime - (minutes*60);
+		else if (hours != 0) seconds = gametime - (hours *3600);
+		else seconds = gametime;
+		hours = hours < 10 ? "0" + hours : hours;
+		minutes = minutes < 10 ? "0" + minutes : minutes;
+		seconds = seconds < 10 ? "0" + seconds : seconds;
+		document.form1.input1.value= hours + ":" + minutes + ":" + seconds + " left in the day phase.";
+		result = hours + ":" + minutes + ":" + seconds + " left in the day phase";
+		ID = window.setTimeout("timeupdate();", 100);
+	} else {
+	}
+}
+</script>
+<body>
+<form NAME="form1">
+<input TYPE="text" NAME="input1" SIZE="40"><br>
+<hr>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<head>Browser<title>
+</title>
+<link rel="stylesheet" type="text/css" href="../style.css">
+</head>
+<script LANGUAGE="Javascript">
+gametime = 3600;
+ID = window.setTimeout("timeupdate(), 1000);
+function timeupdate() {
+	var hours = Math.floor(gametime/3600);
+	var minutes = Math.floor(gametime/60) - (hours*60);
+	var seconds = gametime - (minutes*60);
+	document.write("Time left: " + hours + " hours, " + minutes + " minutes and " + seconds + " seconds left.");
+</script>
+<body>
+<div id="container"> </div>
+<div id="header"> Header Goes Here</div>
+<div id="sidebar"> Left Navigation Goes Here</div>
+<div id="content"> <p>Content Goes Here</p></div>
+<div id="footer"> Footer Goes Here </div>
+</body>
+</html>
