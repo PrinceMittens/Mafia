@@ -1,2 +1,16 @@
 <h1>ExamplePages#home</h1>
 <p>Find me in app/views/example_pages/home.html.erb</p>
+<html>
+<head>Home Page<hr><title>
+</title>
+</head>
+<body>
+<li><%= link_to "Create an Account",  createaccount_path %></li><hr>
+<li><%= link_to "Start a Game!",  makegame_path %></li><hr>
+<li><%= link_to "Sign up for a Game!",  signup_path %></li><hr>
+<li><%= link_to "Ongoing Games",  displayongoing_path %></li><hr>
+<li><%= link_to "Finished Games",  displayfinished_path %></li><hr>
+<li><%= link_to "Free Discussion",  discussion_path %></li><hr>
+
+</body>
+</html>

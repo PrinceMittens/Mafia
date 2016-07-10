@@ -7,4 +7,8 @@ class ExamplePagesController < ApplicationController
 
   def about
   end
+  
+  def create
+  end
+
 end
