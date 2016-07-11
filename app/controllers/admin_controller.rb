@@ -9,6 +9,7 @@ class AdminController < ApplicationController
         new_user = User.new
         new_user.name = params[:name]
         new_user.email = params[:email]
+        new_user.password = params[:password]
         new_user.save
         redirect_to admin_path
         

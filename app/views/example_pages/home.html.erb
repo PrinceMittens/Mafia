@@ -5,12 +5,19 @@
 </title>
 </head>
 <body>
+<% if false %>
 <li><%= link_to "Create an Account",  createaccount_path %></li><hr>
 <li><%= link_to "Start a Game!",  makegame_path %></li><hr>
 <li><%= link_to "Sign up for a Game!",  signup_path %></li><hr>
 <li><%= link_to "Ongoing Games",  displayongoing_path %></li><hr>
 <li><%= link_to "Finished Games",  displayfinished_path %></li><hr>
 <li><%= link_to "Free Discussion",  discussion_path %></li><hr>
-
+<% end %>
+<a href = "/createaccount">Create an Account</a><hr>
+<a href = "/makegame">Start a Game!</a><hr>
+<a href = "/signup">Sign up for a Game!</a><hr>
+<a href = "/displayongoing">Ongoing Games</a><hr>
+<a href = "/displayfinished">Finished Games</a><hr>
+<a href = "/discussion">Free Discussion</a><hr>
 </body>
 </html>
