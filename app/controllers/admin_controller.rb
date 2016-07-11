@@ -25,6 +25,7 @@ class AdminController < ApplicationController
         new_topic.user_id = params[:user_id]
         new_topic.title = params[:title]
         new_topic.content = params[:content]
+        new_topic.type = params[:type]
         new_topic.save
         redirect_to admin_path
     end
