@@ -1,4 +1,4 @@
 class User < ApplicationRecord
-    has_many :Topics
-    has_many :Posts
+    has_many :Topics, dependent: :destroy
+    has_many :Posts,  dependent: :destroy
 end
