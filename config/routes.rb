@@ -1,7 +1,20 @@
 Rails.application.routes.draw do
   
   devise_for :users
-  root "example_pages#home"
+  root "pages#home"
+  get '/t/new',                         to: 'pages#new_topic'
+  get '/topics/create'
+  get '/c/:type',                       to: 'pages#category'
+  get '/t/:id',                         to: 'pages#topic'
+  get '/posts/create'
+  
+  
+  
+  
+  
+  
+  
+  
   get  '/help',                         to: 'example_pages#help'
   get  '/about',                        to: 'example_pages#about'
   get  '/admin',                        to: 'admin#manage'

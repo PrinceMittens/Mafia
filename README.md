@@ -1,6 +1,9 @@
 # Mafia
 The goal of this project: build a website that streamlines the forum-mafia experience both for users and for game mods.
 #Update Log
+##11-07-2016
+* Bootstrap for CSS styling
+* Devise for user authentication
 ##07-07-2016
 * Gemfiles updated
 ```

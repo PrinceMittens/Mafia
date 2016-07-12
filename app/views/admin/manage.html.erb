@@ -52,7 +52,7 @@
             <td><%= User.find(x.user_id).email %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
-            <td><a href="/admin/delete_post/<%= x.id %>">[x]</a></td>
+            <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
     </table>
