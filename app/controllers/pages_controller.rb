@@ -1,11 +1,14 @@
 class PagesController < ApplicationController
     
     def home
-        
+       @all_new = Topic.all.to_a.keep_if{ |x| x.category == 'newgame'}
+       @all_ongoing = Topic.all.to_a.keep_if{ |x| x.category == 'ongoing'}
+       @all_finished = Topic.all.to_a.keep_if{ |x| x.category == 'finished'}
+       @all_discussion = Topic.all.to_a.keep_if{ |x| x.category == 'discussion'}
     end
     
     def new_topic
-            
+        
     end
     
     def category

@@ -20,9 +20,11 @@
     </div>
     <div class="panel-body">
         <ul class="list-group">
-          <li class="list-group-item">Example Topic 1</li>
-          <li class="list-group-item">Example Topic 2</li>
-          <li class="list-group-item">Example Topic 3</li>
+          <% @all_new.each do |x| %>
+            <li class="list-group-item">
+              <%= link_to x.title, "t/" + x.id.to_s %>
+            </li>
+          <% end %>
         </ul>
     </div>
 </div>
@@ -30,11 +32,27 @@
     <div class="panel-heading">
         <%= link_to "Ongoing Games", "c/ongoing" %>
     </div>
-    <div class="panel-body"></div>
+    <div class="panel-body">
+        <ul class="list-group">
+          <% @all_ongoing.each do |x| %>
+            <li class="list-group-item">
+              <%= link_to x.title, "t/" + x.id.to_s %>
+            </li>
+          <% end %>
+        </ul>
+    </div>
 </div>
 <div class="panel panel-warning">
     <div class="panel-heading">
         <%= link_to "Free Discussions", "c/discussion" %>
     </div>
-    <div class="panel-body"></div>
+    <div class="panel-body">
+        <ul class="list-group">
+          <% @all_discussion.each do |x| %>
+            <li class="list-group-item">
+              <%= link_to x.title, "t/" + x.id.to_s %>
+            </li>
+          <% end %>
+        </ul>
+    </div>
 </div>

@@ -4,9 +4,15 @@
   <div class='col-md-10'>
     <p>Forum : <%= @category_real %></p>
   </div>
-  <div class='col-md-2'>
-    <%= link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
-  </div>
+  <% if user_signed_in? %>
+    <div class='col-md-2'>
+      <% if @category == 'newgame' or @category == 'ongoing' %>
+        <%= link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
+      <% elsif @category == 'discussion' %>
+        <%= link_to "Start Discussion", '/t/new', class: "btn btn-lg btn-danger" %>
+      <% end %>
+    </div>
+  <% end %>
   
 </div>
 </p>
