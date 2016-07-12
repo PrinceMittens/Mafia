@@ -5,6 +5,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       
       t.string :title
       t.text :content
+      t.type :type
 
       t.timestamps
     end
