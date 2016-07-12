@@ -1,0 +1,22 @@
+<div>
+  <p>Create a new Topic</p>
+  <form action="../topics/create">
+    <div class="form-group row">
+      <fieldset class="form-group col-md-9">
+        <input type="string" class="form-control" name="title" placeholder="Topic Title">
+      </fieldset>
+      <fieldset class="form-group col-md-3">
+        <select class="form-control" type="string" name="category">
+          <option selected hidden>Choose category</option>
+          <option value="newgame">New Game</option>
+          <option value="discussion">Free Discussion</option>
+        </select>
+      </fieldset>      
+    </div>
+    <fieldset class="form-group">
+      <textarea class="form-control" type="text" name="content" rows="20"></textarea>
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Create Topic</button>
+  </form>
+
+</div>
