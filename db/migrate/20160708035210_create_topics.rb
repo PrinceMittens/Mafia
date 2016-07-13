@@ -5,11 +5,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       
       t.string :title
       t.text :content
-<<<<<<< HEAD
-      t.string :category
-=======
-      t.type :type
->>>>>>> refs/remotes/origin/oysong
+      t.integer :type
 
       t.timestamps
     end
