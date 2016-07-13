@@ -12,7 +12,7 @@ class PagesController < ApplicationController
     end
     
     def category
-        @category = request.original_url.split('/').last
+        @category = request.original_url.split('/').last.to_i
         @category_real = category_real(@category)
         @all_topic = Topic.all
     end
