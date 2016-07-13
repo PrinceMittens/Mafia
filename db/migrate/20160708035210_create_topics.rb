@@ -8,6 +8,8 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       
       # 0: Regular Thread
       # 1: Sign-up Thread
+      # 2: Game Thread
+      # 3: Endgame Thread
       t.integer :type
 
       t.timestamps
