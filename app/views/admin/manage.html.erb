@@ -33,8 +33,9 @@
             <option value="<%= x.id %>"><%= x.email %></option>
             <% end %>
         </select>
-        <input type='string' name='title'   placeholder="Topic Title"></input>
-        <input type='text'   name='content' placeholder="Topic Content"></input>
+        <input type='string'   name='title'   placeholder="Topic Title"></input>
+        <input type='text'     name='content' placeholder="Topic Content"></input>
+        <input type='checkbox' name='type' placeholder="Game Thread?"></input>
         <input type='submit' value='Create Topic'></input>
     </form>
 
@@ -44,6 +45,7 @@
             <th>User name</th>
             <th>Topic title</th>
             <th>Topic content</th>
+            <th>Game Thread?</th>
             <th>[x]</th>
         </tr>
         <% @all_topic.each do |x| %>
@@ -52,13 +54,18 @@
             <td><%= User.find(x.user_id).email %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
+<<<<<<< HEAD
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
+=======
+            <td><%= x.type %></td>
+            <td><a href="/admin/delete_post/<%= x.id %>">[x]</a></td>
+>>>>>>> refs/remotes/origin/oysong
         </tr>
         <% end %>
     </table>
 </div>
 
-<!-- Topics -->
+<!-- Posts -->
 <div>
     <h1>Manage Posts</h1>
     <form action="/admin/create_post">
