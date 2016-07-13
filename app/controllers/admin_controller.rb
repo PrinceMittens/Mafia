@@ -26,10 +26,10 @@ class AdminController < ApplicationController
         new_topic.user_id = params[:user_id]
         new_topic.title = params[:title]
         new_topic.content = params[:content]
-        if params[:type]
-            new_topic.type = 1
+        if params[:category]
+            new_topic.category = 1
         else
-            new_topic.type = 0
+            new_topic.category = 0
         end
         new_topic.save
         redirect_to admin_path
