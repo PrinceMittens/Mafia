@@ -8,6 +8,12 @@
   <div class="panel-body">
     <%= @topic.content %>
   </div>
+  <% # if @category >= 1 %>
+    <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
+    <% if @category == 1 %>
+      <% # = link_to "Sign up", '???', class: "btn btn-lg btn-danger" %>
+    <% end %>
+  <% # end %>
 </div>
 
 <% @posts.each do |x| %>
