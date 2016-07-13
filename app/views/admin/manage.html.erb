@@ -54,12 +54,8 @@
             <td><%= User.find(x.user_id).email %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
-<<<<<<< HEAD
-            <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
-=======
             <td><%= x.type %></td>
-            <td><a href="/admin/delete_post/<%= x.id %>">[x]</a></td>
->>>>>>> refs/remotes/origin/oysong
+            <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
     </table>
