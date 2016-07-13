@@ -10,7 +10,7 @@
   </div>
   <% # if @category >= 1 %>
     <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
-    <% if @category == 1 %>
+    <% if @topic.category == 1 %>
       <%= link_to "Sign up", '', class: "btn btn-lg btn-danger" %>
     <% end %>
   <% # end %>
