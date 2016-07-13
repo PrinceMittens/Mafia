@@ -5,7 +5,12 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       
       t.string :title
       t.text :content
-      t.type :type
+      
+      # 0: Regular Thread
+      # 1: Sign-up Thread
+      # 2: Game Thread
+      # 3: Endgame Thread
+      t.integer :type
 
       t.timestamps
     end

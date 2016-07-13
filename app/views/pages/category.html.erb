@@ -1,0 +1,38 @@
+<p>
+<div class='row'>
+  
+  <div class='col-md-10'>
+    <p>Forum : <%= @category_real %></p>
+  </div>
+  <% if user_signed_in? %>
+    <div class='col-md-2'>
+      <% if @category == 'newgame' or @category == 'ongoing' %>
+        <%= link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
+      <% elsif @category == 'discussion' %>
+        <%= link_to "Start Discussion", '/t/new', class: "btn btn-lg btn-danger" %>
+      <% end %>
+    </div>
+  <% end %>
+  
+</div>
+</p>
+<table class="table">
+  <tr>
+    <th>Topic</th>
+    <th>Category</th>
+    <th>Posts</th>
+    <th>Views</th>
+    <th>Last Active</th>
+  </tr>
+  <% @all_topic.each do |x| %>
+    <% if x.category == @category %>
+      <tr>
+        <td><%= link_to x.title, '../t/' + x.id.to_s %></td>
+        <td><%= category_real(x.category) %></td>
+        <td><%= x.Posts.count%></td>
+        <td>0</td>
+        <td>0</td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
