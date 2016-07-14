@@ -38,4 +38,8 @@ class PagesController < ApplicationController
         @user = user
         @posts = topic.Posts
     end
+    
+    def manual
+        
+    end    
 end
