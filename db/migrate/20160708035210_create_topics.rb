@@ -10,7 +10,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       # 1: Sign-up Thread
       # 2: Game Thread
       # 3: Endgame Thread
-      t.integer :type
+      t.integer :category
 
       t.timestamps
     end

@@ -35,7 +35,7 @@
         </select>
         <input type='string'   name='title'   placeholder="Topic Title"></input>
         <input type='text'     name='content' placeholder="Topic Content"></input>
-        <input type='checkbox' name='type' placeholder="Game Thread?"></input>
+        <input type='checkbox' name='category' placeholder="Game Thread?"></input>
         <input type='submit' value='Create Topic'></input>
     </form>
 
@@ -54,7 +54,7 @@
             <td><%= User.find(x.user_id).email %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
-            <td><%= x.type %></td>
+            <td><%= x.category %></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>

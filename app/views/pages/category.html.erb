@@ -6,9 +6,9 @@
   </div>
   <% if user_signed_in? %>
     <div class='col-md-2'>
-      <% if @category == 'newgame' or @category == 'ongoing' %>
+      <% if @category == 1 or @category == 2 %>
         <%= link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
-      <% elsif @category == 'discussion' %>
+      <% elsif @category == 0 %>
         <%= link_to "Start Discussion", '/t/new', class: "btn btn-lg btn-danger" %>
       <% end %>
     </div>

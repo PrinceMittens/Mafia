@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root "pages#home"
   get '/t/new',                         to: 'pages#new_topic'
   get '/topics/create'
-  get '/c/:type',                       to: 'pages#category'
+  get '/c/:category',                   to: 'pages#category'
   get '/t/:id',                         to: 'pages#topic'
   get '/posts/create'
   

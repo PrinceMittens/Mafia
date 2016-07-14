@@ -1,10 +1,10 @@
 class PagesController < ApplicationController
     
     def home
-       @all_new = Topic.all.to_a.keep_if{ |x| x.category == 'newgame'}
-       @all_ongoing = Topic.all.to_a.keep_if{ |x| x.category == 'ongoing'}
-       @all_finished = Topic.all.to_a.keep_if{ |x| x.category == 'finished'}
-       @all_discussion = Topic.all.to_a.keep_if{ |x| x.category == 'discussion'}
+       @all_new = Topic.all.to_a.keep_if{ |x| x.category == 1}
+       @all_ongoing = Topic.all.to_a.keep_if{ |x| x.category == 2}
+       @all_finished = Topic.all.to_a.keep_if{ |x| x.category == 3}
+       @all_discussion = Topic.all.to_a.keep_if{ |x| x.category == 0}
     end
     
     def new_topic
@@ -12,19 +12,19 @@ class PagesController < ApplicationController
     end
     
     def category
-        @category = request.original_url.split('/').last
+        @category = request.original_url.split('/').last.to_i
         @category_real = category_real(@category)
         @all_topic = Topic.all
     end
     
     def category_real category
-        if category == 'newgame'
+        if category == 1
             'New Game'
-        elsif category == 'discussion'
+        elsif category == 0
             'Free Discussion'
-        elsif category == 'ongoing'
+        elsif category == 2
             'Ongoing Game'
-        elsif category == 'finished'
+        elsif category == 3
             'Finished Game'
         end    
     end
