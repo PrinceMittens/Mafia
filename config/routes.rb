@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   devise_for :users
   root "pages#home"
+  get 'm/manual',                       to: 'pages#manual'
   get '/t/new',                         to: 'pages#new_topic'
   get '/topics/create'
   get '/c/:category',                   to: 'pages#category'
