@@ -5,12 +5,14 @@
       <fieldset class="form-group col-md-9">
         <input type="string" class="form-control" name="title" placeholder="Topic Title">
       </fieldset>
-      
-      <input type="hidden" name="category" value='newgame' />
+      <fieldset class="form-group col-md-3">
+        <select class="form-control" type="string" name="category">
+          <option selected hidden>Choose category</option>
+          <option value="newgame">New Game</option>
+          <option value="discussion">Free Discussion</option>
+        </select>
+      </fieldset>      
     </div>
-    <% if false %>
-    if my_string.include? "cde"
-    <% end %>
     <fieldset class="form-group">
       <textarea class="form-control" type="text" name="content" rows="20"></textarea>
     </fieldset>
