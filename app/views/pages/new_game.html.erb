@@ -1,18 +1,19 @@
 <div>
-  <p>Create a new Topic</p>
+  <h1>Creating a New Game</h1>
   <form action="../topics/create">
+    <input type="hidden" name="category" value = 1 />
     <div class="form-group row">
       <fieldset class="form-group col-md-9">
-        <input type="string" class="form-control" name="title" placeholder="Topic Title">
+        <input type="string" class="form-control" name="title" placeholder="Game Title">
+        <input type="string" class="form-control" name="num_mafia" placeholder="Number of Mafia you want in the game">
+        <input type="string" class="form-control" name="num_town" placeholder="Number of Town you want in the game">
+        <input type="string" class="form-control" name="day_timelimit" placeholder="Length of the Day Phase">
+        <input type="string" class="form-control" name="night_timelimit" placeholder="Length of the Night Phase">
       </fieldset>
-      <fieldset class="form-group col-md-3">
-        <select class="form-control" type="string" name="category">
-          <option selected hidden>Choose category</option>
-          <option value="newgame">New Game</option>
-          <option value="discussion">Free Discussion</option>
-        </select>
-      </fieldset>      
     </div>
+    <% if false %>
+    if my_string.include? "cde"
+    <% end %>
     <fieldset class="form-group">
       <textarea class="form-control" type="text" name="content" rows="20"></textarea>
     </fieldset>

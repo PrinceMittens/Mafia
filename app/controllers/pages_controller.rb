@@ -11,6 +11,10 @@ class PagesController < ApplicationController
         
     end
     
+    def new_game
+        
+    end
+    
     def category
         @category = request.original_url.split('/').last.to_i
         @category_real = category_real(@category)
