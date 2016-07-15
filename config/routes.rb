@@ -8,7 +8,8 @@ Rails.application.routes.draw do
   get '/c/:category',                   to: 'pages#category'
   get '/t/:id',                         to: 'pages#topic'
   get '/posts/create'
-  get '/makegame',                       to: 'pages#new_game'  
+  get '/makegame',                      to: 'pages#new_game'
+  get '/topics/signup'
   
   
   

@@ -16,10 +16,17 @@ class TopicsController < ApplicationController
     new_topic.time_left = 0
     new_topic.gameover = false
     new_topic.who_won = -1
+    # new_topic.player_list = [] #array to store list of player objects
     new_topic.save
     redirect_to root_path
   end
   
+  
+  def signup
+    if new_topic.player_list == nil
+      new_topic.player_list = nil
+    end
+  end
   # change the phase from day to night and vice verse
   # update the phase timer
   # check if game is over
@@ -28,14 +35,14 @@ class TopicsController < ApplicationController
     if phase == 1 || phase == -1
       phase = 0
       time_left = day_timelimit
-    else if phase == 0
+    elsif phase == 0
       phase = 1
       time_left = night_timelimit
     end
     if new_topic.num_mafia >= new_topic.num_town
       gameover = true
       who_won = 0
-    else if num_mafia == 0
+    elsif num_mafia == 0
       gameover = true
       who_won = 1
     # else if other win condition 

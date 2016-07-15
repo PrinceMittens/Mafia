@@ -17,14 +17,15 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       # 0: day phase
       # 1: night phase
       t.integer :phase
-      
+
+      t.integer :time_left
+      t.boolean :gameover
       t.integer :num_players_alive
       t.integer :num_mafia
       t.integer :num_town
       t.integer :day_timelimit
       t.integer :night_timelimit
-      t.integer :time_left
-      t.boolean :gameover
+
       
       # 0: Mafia won this game
       # 1: Town won this game

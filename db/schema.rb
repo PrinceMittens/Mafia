@@ -28,11 +28,14 @@ ActiveRecord::Schema.define(version: 20160711230513) do
     t.integer  "category"
     t.integer  "roster_count"
     t.integer  "phase"
+    t.integer  "time_left"
+    t.boolean  "gameover"
     t.integer  "num_players_alive"
     t.integer  "num_mafia"
     t.integer  "num_town"
     t.integer  "day_timelimit"
     t.integer  "night_timelimit"
+    t.integer  "who_won"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
   end
