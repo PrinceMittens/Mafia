@@ -1,11 +1,11 @@
-<div>
+   <div>
   <p>Create a new Topic</p>
   <form action="../topics/create">
     <div class="form-group row">
       <fieldset class="form-group col-md-9">
         <input type="string" class="form-control" name="title" placeholder="Topic Title">
       </fieldset>
-      <input type="hidden" name="category" value = 0 />
+      <input type="integer" name="category" value = 1 />
     </div>
     <% if false %>
     if my_string.include? "cde"

@@ -12,6 +12,14 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       # 3: Endgame Thread
       t.integer :category
 
+      t.integer :roster_count
+      t.integer :phase
+      t.integer :num_players_alive
+      t.integer :num_mafia
+      t.integer :num_town
+      t.integer :day_timelimit
+      t.integer :night_timelimit
+      
       t.timestamps
     end
   end
