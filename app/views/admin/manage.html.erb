@@ -45,6 +45,8 @@
             <th>User name</th>
             <th>Topic title</th>
             <th>Topic content</th>
+            <th>Townies</th>
+            <th>Mafia</th>
             <th>Game Thread?</th>
             <th>[x]</th>
         </tr>
@@ -54,6 +56,8 @@
             <td><%= User.find(x.user_id).email %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
+            <td><%= x.num_town %></td>
+            <td><%= x.num_mafia %></td>
             <td><%= x.category %></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>

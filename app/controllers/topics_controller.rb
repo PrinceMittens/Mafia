@@ -1,5 +1,5 @@
 class TopicsController < ApplicationController
-  
+
   def create
     new_topic = Topic.new
     new_topic.user_id = current_user.id
@@ -10,22 +10,19 @@ class TopicsController < ApplicationController
     new_topic.phase = -1
     new_topic.num_players_alive = params[:num_players_alive]
     new_topic.num_mafia = params[:num_mafia]
-    new_topic.num_town = params[:num_town]
+    @towncount = new_topic.num_town = params[:num_town]
     new_topic.day_timelimit = params[:day_timelimit]
     new_topic.night_timelimit = params[:night_timelimit]
     new_topic.time_left = 0
     new_topic.gameover = false
     new_topic.who_won = -1
-    # new_topic.player_list = [] #array to store list of player objects
     new_topic.save
     redirect_to root_path
   end
   
   
   def signup
-    if new_topic.player_list == nil
-      new_topic.player_list = nil
-    end
+    new_topic.player_list = 4
   end
   # change the phase from day to night and vice verse
   # update the phase timer

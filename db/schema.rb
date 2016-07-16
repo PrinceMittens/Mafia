@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160711230513) do
     t.integer  "num_town"
     t.integer  "day_timelimit"
     t.integer  "night_timelimit"
+    t.text     "player_list"
     t.integer  "who_won"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

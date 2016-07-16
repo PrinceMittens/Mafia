@@ -25,7 +25,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       t.integer :num_town
       t.integer :day_timelimit
       t.integer :night_timelimit
-
+      t.text :player_list
       
       # 0: Mafia won this game
       # 1: Town won this game
