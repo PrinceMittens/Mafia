@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711230513) do
+ActiveRecord::Schema.define(version: 20160717231526) do
+
+  create_table "players", force: :cascade do |t|
+    t.string   "role"
+    t.string   "affiliation"
+    t.boolean  "is_dead"
+    t.integer  "vote_who"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
