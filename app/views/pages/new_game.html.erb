@@ -1,22 +1,141 @@
+<head><style>
+hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 1px;
+}
+</style>
+</head>
 <div>
-  <p>Create a new Topic</p>
+  <h1>Creating a New Game</h1>
   <form action="../topics/create">
+    <input type="hidden" name="category" value = 1 />
     <div class="form-group row">
       <fieldset class="form-group col-md-9">
-        <input type="string" class="form-control" name="title" placeholder="Topic Title">
-      </fieldset>
-      <fieldset class="form-group col-md-3">
-        <select class="form-control" type="string" name="category">
-          <option selected hidden>Choose category</option>
-          <option value="newgame">New Game</option>
-          <option value="discussion">Free Discussion</option>
+<hr>
+        <input type="string" class="form-control" name="title" placeholder="Game Title">
+
+<hr>
+        <label for="sel1">Number of mafia:</label>
+        <select name = "num_mafia">
+           <option value = "1">1</option>
+           <option value = "2">2</option>
+           <option value = "3">3</option>
+           <option value = "4">4</option>
+           <option value = "5">5</option>
+           <option value = "6">6</option>
+           <option value = "7">7</option>
+           <option value = "8">8</option>
+           <option value = "9">9</option>
+           <option value = "10">10</option>
+           <option value = "11">11</option>
+           <option value = "12">12</option>
+           <option value = "13">13</option>
+           <option value = "14">14</option>
+           <option value = "15">15</option>
+           <option value = "16">16</option>
+           <option value = "17">17</option>
+           <option value = "18">18</option>
+           <option value = "19">19</option>
+           <option value = "20">20</option>
+           <option value = "21">21</option>
+           <option value = "22">22</option>
+           <option value = "23">23</option>
+           <option value = "24">24</option>
+           <option value = "25">25</option>
+           <option value = "26">26</option>
+           <option value = "27">27</option>
+           <option value = "28">28</option>
+           <option value = "29">29</option>
+           <option value = "30">30</option>
         </select>
-      </fieldset>      
+<hr>
+        <label for="sel1">Number of town:</label>
+        <select name = "num_town">
+           <option value = "1">1</option>
+           <option value = "2">2</option>
+           <option value = "3">3</option>
+           <option value = "4">4</option>
+           <option value = "5">5</option>
+           <option value = "6">6</option>
+           <option value = "7">7</option>
+           <option value = "8">8</option>
+           <option value = "9">9</option>
+           <option value = "10">10</option>
+           <option value = "11">11</option>
+           <option value = "12">12</option>
+           <option value = "13">13</option>
+           <option value = "14">14</option>
+           <option value = "15">15</option>
+           <option value = "16">16</option>
+           <option value = "17">17</option>
+           <option value = "18">18</option>
+           <option value = "19">19</option>
+           <option value = "20">20</option>
+           <option value = "21">21</option>
+           <option value = "22">22</option>
+           <option value = "23">23</option>
+           <option value = "24">24</option>
+           <option value = "25">25</option>
+           <option value = "26">26</option>
+           <option value = "27">27</option>
+           <option value = "28">28</option>
+           <option value = "29">29</option>
+           <option value = "30">30</option>
+        </select>
+<hr>
+        <label for="sel1">Length of Day Phase:</label>
+        <select name = "day_timelimit">
+           <option value = "1"> 336 hours (2 weeks)</option>
+           <option value = "2"> 168 hours (1 week)</option>
+           <option value = "3"> 120 hours (5 days)</option>
+           <option value = "4"> 72 hours (3 days)</option>
+           <option value = "5"> 48 hours (2 days)</option>
+           <option value = "6"> 24 hours (1 day)</option>
+           <option value = "7"> 12 hours</option>
+           <option value = "8"> 6 hours</option>
+           <option value = "9"> 3 hours</option>
+           <option value = "10"> 2 hours</option>
+           <option value = "11"> 1 hour</option>
+           <option value = "12"> 1/2 hours (30 minutes)</option>
+           <option value = "13"> 1/4 hours (15 minutes)</option>
+           <option value = "14"> 1/6 hours (10 minutes)</option>
+           <option value = "15"> 1/12 hours (5 minutes)</option>
+        </select>
+<hr>
+        <label for="sel1">Length of Night Phase:</label>
+        <select name = "night_timelimit">
+           <option value = "1"> 336 hours (2 weeks)</option>
+           <option value = "2"> 168 hours (1 week)</option>
+           <option value = "3"> 120 hours (5 days)</option>
+           <option value = "4"> 72 hours (3 days)</option>
+           <option value = "5"> 48 hours (2 days)</option>
+           <option value = "6"> 24 hours (1 day)</option>
+           <option value = "7"> 12 hours</option>
+           <option value = "8"> 6 hours</option>
+           <option value = "9"> 3 hours</option>
+           <option value = "10"> 2 hours</option>
+           <option value = "11"> 1 hour</option>
+           <option value = "12"> 1/2 hours (30 minutes)</option>
+           <option value = "13"> 1/4 hours (15 minutes)</option>
+           <option value = "14"> 1/6 hours (10 minutes)</option>
+           <option value = "15"> 1/12 hours (5 minutes)</option>
+        </select>
+<hr>
+<% if false %><input type="string" class="form-control" name="night_timelimit" placeholder="Length of the Night Phase"><% end %>
+      </fieldset>
     </div>
+</div>
+
+
     <fieldset class="form-group">
-      <textarea class="form-control" type="text" name="content" rows="20"></textarea>
+      <textarea class="form-control" type="text" name="content" placeholder = "Game Description" rows="10"></textarea>
     </fieldset>
-    <button type="submit" class="btn btn-primary">Create Topic</button>
+    <button type="submit" class="btn btn-primary">Create Game</button>
   </form>
 
 </div>

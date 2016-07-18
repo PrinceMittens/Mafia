@@ -5,9 +5,9 @@
 <p>Frist, create a Forum Mafia account by clicking this <%= link_to "Log in", "/users/sign_in" %> link or the link in the upper right corner of the screen.</p>
 <p>If you do not have an account on Forum Mafia, then follow the <%= link_to "Log in", "/users/sign_in" %> link and click the sign up link at the bottom of the page or follow this link to <%= link_to "Sign Up", "/users/sign_up" %>.</p>
 <p>You can click the following link to navigate to the <%= link_to "home page", root_path %>. </p>
-<p>From the home page you can click the button <%= link_to "Create Game", "/t/new" %> to start a new game. </p>
+<p>From the home page you can click the button <%= link_to "Create Game", "/makegame" %> to start a new game. </p>
 <p>You can also join a created game by selecting a game from the list of <%= link_to "games", "/c/1" %>.</p>
-<p>To create a discussion thread, you can navigate to the home page and select the <%= link_to "create discussion", "#" %> button.</p><br>
+<p>To create a discussion thread, you can navigate to the home page and select the <%= link_to "create discussion", "/t/new" %> button.</p><br>
 <p style="font-size:20px">Gameplay</p>
 <p>Once you have joined a game, the game will start once all the players spots have been filled.</p>
 <p>All players will be assigned a hidden role (towns person, mafia, doctor, cop, ...) Depending on your role you will have a different objective. See <%= link_to "Mafia Rules", "#" %>.</p>

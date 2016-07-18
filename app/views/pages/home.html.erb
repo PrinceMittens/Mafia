@@ -6,7 +6,7 @@
   </h2>
   <% if user_signed_in? %>
     <%= link_to "My Games", '#', class: "btn btn-lg btn-warning" %>
-    <%= link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
+    <%= link_to "Create Game", '/makegame', class: "btn btn-lg btn-danger" %>
   <% else %>
 	<%= link_to "Sign up now!", new_user_registration_path, class: "btn btn-lg btn-info" %>
     <%= link_to "Log in", new_user_session_path, class: "btn btn-lg btn-primary" %>
