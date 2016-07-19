@@ -25,9 +25,9 @@ class TopicsController < ApplicationController
   end
   
   def signup
-    temp_int = params[:id]
-    @topic = Topic.find(temp_int)
-    @topic.roster_count = 1
+    @topic = Topic.find(params[:id])
+    @topic.roster_count += 1
+    @topic.save
     redirect_to root_path
   end
   
