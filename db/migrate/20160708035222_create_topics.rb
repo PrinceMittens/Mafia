@@ -2,6 +2,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
   def change
     create_table :topics do |t|
       t.integer :user_id
+      t.integer :player_id
       
       t.string :title
       t.text :content
@@ -41,8 +42,6 @@ class CreateTopics < ActiveRecord::Migration[5.0]
       #15: 5 minutes
       t.integer :day_timelimit
       t.integer :night_timelimit
-      
-      t.text :player_list
       
       # 0: Mafia won this game
       # 1: Town won this game
