@@ -3,6 +3,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new
     @topic.user_id = current_user.id
+    @topic.player_id = -1
     @topic.title = params[:title]
     @topic.category = params[:category]
     @topic.content = params[:content]
@@ -27,7 +28,23 @@ class TopicsController < ApplicationController
   def signup
     temp_int = params[:id]
     @topic = Topic.find(temp_int)
-    @topic.roster_count = 1
+    @topic.roster_count = @topic.roster_count + 1
+    @topic.save
+    player = Player.new
+    player.user_id = current_user.id
+    player.topic_id = temp_int
+    player.is_dead = false
+    player.save
+    if @topic.player_id == -1
+      # @topic.player_id =
+    else
+      tmp_p_id = @topic.player_id
+      while tmp_p_id != -1
+        tmp_p_id = Player.find(tmp_p_id).id
+      end
+      tmp_p = Player.find(tmp_p_id)
+      # tmp_p.next_player_id = 
+    end
     redirect_to root_path
   end
   
