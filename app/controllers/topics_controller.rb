@@ -6,7 +6,7 @@ class TopicsController < ApplicationController
     @topic.title = params[:title]
     @topic.category = params[:category]
     @topic.content = params[:content]
-    @topic.roster_count = params[:roster_count]
+    @topic.roster_count = 0
     @topic.phase = -1
     @topic.num_players_alive = params[:num_players_alive]
     @topic.num_mafia = params[:num_mafia]
@@ -23,9 +23,14 @@ class TopicsController < ApplicationController
   def new
     @topic = Topic.new
   end
+  
   def signup
-    new_topic.player_list = 4
+    temp_int = params[:id]
+    @topic = Topic.find(temp_int)
+    @topic.roster_count = 1
+    redirect_to root_path
   end
+  
   # change the phase from day to night and vice verse
   # update the phase timer
   # check if game is over
