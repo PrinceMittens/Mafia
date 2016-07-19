@@ -36,6 +36,7 @@
         <input type='string'   name='title'   placeholder="Topic Title"></input>
         <input type='text'     name='content' placeholder="Topic Content"></input>
         <input type='checkbox' name='category' placeholder="Game Thread?"></input>
+        <input type='integer'  name='roster_count' placeholder="Roster_C"></input>
         <input type='submit' value='Create Topic'></input>
     </form>
 
@@ -43,11 +44,12 @@
         <tr>
             <th>No.</th>
             <th>User name</th>
-            <th>Topic title</th>
+            <th>Title</th>
             <th>Topic content</th>
             <th>Townies</th>
             <th>Mafia</th>
-            <th>Game Thread?</th>
+            <th>GameThrd</th>
+            <th>Roster_C</th>
             <th>[x]</th>
         </tr>
         <% @all_topic.each do |x| %>
@@ -59,6 +61,7 @@
             <td><%= x.num_town %></td>
             <td><%= x.num_mafia %></td>
             <td><%= x.category %></td>
+            <td><%= x.roster_count %></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
