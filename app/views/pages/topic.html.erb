@@ -3,7 +3,7 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @user.email %>
+    <%= @user.name %>
   </div>
   <div class="panel-body">
     <%= @topic.content %>
@@ -22,7 +22,7 @@
 <% @posts.each do |x| %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= @all_user.find(x.user_id).email %>
+      <%= @all_user.find(x.user_id).name %>
     </div>
     <div class="panel-body">
       <%= x.content %>
