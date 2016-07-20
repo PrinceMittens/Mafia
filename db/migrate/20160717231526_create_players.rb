@@ -4,12 +4,14 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       
       t.integer :user_id
       t.integer :topic_id
+      t.string  :player_email
       
       t.string :role
       t.string :affiliation
       t.boolean :is_dead
       t.integer :vote_who
       t.integer :next_player_id
+      t.integer :prev_player_id
 
       t.timestamps
     end
