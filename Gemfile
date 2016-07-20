@@ -2,11 +2,15 @@ source 'https://rubygems.org'
 
 gem 'rails',        '5.0.0'
 
+# live updating
+gem 'private_pub'
+gem 'thin'
+
 # added for css styling
 gem 'bootstrap-sass', '3.3.6'
 
 gem 'devise'
-gem 'simple_form', '~> 3.2.1'
+#gem 'simple_form', '~> 3.2.1'
 
 gem 'puma',         '3.4.0'
 gem 'sass-rails',   '5.0.5'
