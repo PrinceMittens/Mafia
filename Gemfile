@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 gem 'rails',        '5.0.0'
 
+# live updating
+gem 'private_pub'
+gem 'thin'
+
 # added for css styling
 gem 'bootstrap-sass', '3.3.6'
 
