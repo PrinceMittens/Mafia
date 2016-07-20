@@ -54,6 +54,10 @@
             <th>Roster_C</th>
             <th>Phase</th>
             <th>Who won</th>
+            <th>Last Reg w/user</th>
+            <th>Last Reg w/player</th>
+            <th>2Last w/player</th>
+            <th>3Last w/player</th>
             <th>[x]</th>
         </tr>
         <% @all_topic.each do |x| %>
@@ -68,6 +72,10 @@
             <td><%= x.roster_count %></td>
             <td><%= x.phase %></td>
             <td><%= x.who_won %></td>
+            <td><%= User.find(x.last_registered_player_id).email%></td>
+            <td><%= Player.find(x.last_registered_player_id).player_email%></td>
+            <td><%= Player.find(Player.find(Player.find(x.last_registered_player_id).user_id).prev_player_id).player_email%></td>
+            <td><%= Player.find(Player.find(Player.find(Player.find(x.last_registered_player_id).user_id).prev_player_id).prev_player_id).player_email%></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>

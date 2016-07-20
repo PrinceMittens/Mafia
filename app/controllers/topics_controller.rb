@@ -3,7 +3,7 @@ class TopicsController < ApplicationController
   def create
     @topic = Topic.new
     @topic.user_id = current_user.id
-    @topic.player_id = -1
+    @topic.last_registered_player_id = @topic.player_id = -1
     @topic.title = params[:title]
     @topic.category = params[:category]
     @topic.content = params[:content]
@@ -25,26 +25,30 @@ class TopicsController < ApplicationController
     @topic = Topic.new
   end
   
+  # Creates player, initializes the player's values, 
+  # then inserts the player onto the end of the list
   def signup
     temp_int = params[:id]
     @topic = Topic.find(temp_int)
     @topic.roster_count += 1
-    @topic.save
-    player = Player.new
-    player.user_id = current_user.id
-    player.topic_id = temp_int
-    player.is_dead = false
-    player.save
-    if @topic.player_id == -1
-      # @topic.player_id =
+    new_player = Player.new
+    new_player.user_id = current_user.id.to_i
+    new_player.player_email = User.find(new_player.user_id).email
+    new_player.prev_player_id = new_player.next_player_id = -1
+    new_player.topic_id = temp_int
+    new_player.is_dead = false
+    #set new player to head (@topic.player_id) if first new player
+    if @topic.last_registered_player_id == -1
+      @topic.player_id = @topic.last_registered_player_id = new_player.user_id
     else
-      tmp_p_id = @topic.player_id
-      while tmp_p_id != -1
-        tmp_p_id = Player.find(tmp_p_id).id
-      end
-      tmp_p = Player.find(tmp_p_id)
-      # tmp_p.next_player_id = 
+      curr_last = Player.find(@topic.last_registered_player_id)
+      curr_last.next_player_id = new_player.user_id
+      new_player.prev_player_id = curr_last.user_id
+      @topic.last_registered_player_id = new_player.user_id
+      curr_last.save
     end
+    @topic.save
+    new_player.save
     redirect_to root_path
   end
   

@@ -3,6 +3,7 @@ class CreateTopics < ActiveRecord::Migration[5.0]
     create_table :topics do |t|
       t.integer :user_id
       t.integer :player_id
+      t.integer :last_registered_player_id
       
       t.string :title
       t.text :content
