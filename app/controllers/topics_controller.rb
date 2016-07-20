@@ -37,14 +37,15 @@ class TopicsController < ApplicationController
     new_player.prev_player_id = new_player.next_player_id = -1
     new_player.topic_id = temp_int
     new_player.is_dead = false
+    new_player.save
     #set new player to head (@topic.player_id) if first new player
     if @topic.last_registered_player_id == -1
-      @topic.player_id = @topic.last_registered_player_id = new_player.user_id
+      @topic.player_id = @topic.last_registered_player_id = new_player.id
     else
       curr_last = Player.find(@topic.last_registered_player_id)
-      curr_last.next_player_id = new_player.user_id
-      new_player.prev_player_id = curr_last.user_id
-      @topic.last_registered_player_id = new_player.user_id
+      curr_last.next_player_id = new_player.id
+      new_player.prev_player_id = curr_last.id
+      @topic.last_registered_player_id = new_player.id
       curr_last.save
     end
     @topic.save
