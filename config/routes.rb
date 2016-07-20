@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   get  '/admin/delete_topic/:id',       to: 'admin#delete_topic'
   get  '/admin/create_post'
   get  '/admin/delete_post/:id',        to: 'admin#delete_post'
+  get  '/admin/create_player'
+  get  '/admin/delete_player/:id',      to: 'admin#delete_player'
+  get  '/admin/simulate_game'
   
   get  '/makegame',                     to: 'example_pages#makegame'
   get  '/signup',                       to: 'example_pages#signup'

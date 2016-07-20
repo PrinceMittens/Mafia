@@ -50,6 +50,8 @@
             <th>Mafia</th>
             <th>GameThrd</th>
             <th>Roster_C</th>
+            <th>Phase</th>
+            <th>Who won</th>
             <th>[x]</th>
         </tr>
         <% @all_topic.each do |x| %>
@@ -62,6 +64,8 @@
             <td><%= x.num_mafia %></td>
             <td><%= x.category %></td>
             <td><%= x.roster_count %></td>
+            <td><%= x.phase %></td>
+            <td><%= x.who_won %></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
@@ -107,4 +111,52 @@
         </tr>
         <% end %>
     </table>
+</div>
+
+<!-- Players -->
+<div>
+    <h1>Manage Players</h1>
+    <form action="/admin/create_player">
+        <select name='user_id'>
+            <% @all_user.each do |x| %>
+            <option value="<%= x.id %>"><%= x.email %></option>
+            <% end %>
+        </select>
+        <select name='topic_id'>
+            <% @all_topic.each do |x| %>
+            <option value="<%= x.id %>"><%= x.title %></option>
+            <% end %>
+        </select>
+        <input type='submit' value='Join Room'></input>
+    </form>
+
+    <table border>
+        <tr>
+            <th>No.</th>
+            <th>User Name</th>
+            <th>Topic Name</th>
+            <th>[x]</th>
+        </tr>
+        <% @all_player.each do |x| %>
+        <tr>
+            <td><%= x.id %></td>
+            <td><%= User.find(x.user_id).email %></td>
+            <td><%= Topic.find(x.topic_id).title %></td>
+            <td><a href="/admin/delete_player/<%= x.id %>">[x]</a></td>
+        </tr>
+        <% end %>
+    </table>
+</div>
+
+<!-- Simulate Games -->
+<div>
+    <h1>Simulate Games</h1>
+    <form action="/admin/simulate_game">
+        <select name='topic_id'>
+            <% @all_topic.each do |x| %>
+            <option value="<%= x.id %>"><%= x.title %></option>
+            <% end %>
+        </select>
+        <input type='submit' value='Simulate!'></input>
+    </form>
 </div>
