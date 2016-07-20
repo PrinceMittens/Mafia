@@ -13,12 +13,15 @@
 ActiveRecord::Schema.define(version: 20160717231526) do
 
   create_table "players", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
     t.string   "role"
     t.string   "affiliation"
     t.boolean  "is_dead"
     t.integer  "vote_who"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "next_player_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -32,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160717231526) do
 
   create_table "topics", force: :cascade do |t|
     t.integer  "user_id"
+    t.integer  "player_id"
     t.string   "title"
     t.text     "content"
     t.integer  "category"
@@ -44,7 +48,6 @@ ActiveRecord::Schema.define(version: 20160717231526) do
     t.integer  "num_town"
     t.integer  "day_timelimit"
     t.integer  "night_timelimit"
-    t.text     "player_list"
     t.integer  "who_won"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
