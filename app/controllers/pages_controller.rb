@@ -49,5 +49,9 @@ class PagesController < ApplicationController
     end    
     def manual
         
-    end    
+    end  
+    
+    def game
+    
+    end
 end
