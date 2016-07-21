@@ -1,1 +1,35 @@
-<h2>Game Page</h2>
+<p><%= @topic.title %></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= @user.name %>
+  </div>
+  <div class="panel-body">
+    <%= @topic.content %>
+  </div>
+</div>
+
+<% @posts.each do |x| %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= @all_user.find(x.user_id).name %>
+    </div>
+    <div class="panel-body">
+      <%= x.content %>
+    </div>
+  </div>
+<% end %>
+
+<div>
+  
+  <form action="../posts/create">
+    <p><button type="submit" class="btn btn-primary">Reply</button></p>
+    <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>' />
+    
+    <fieldset class="form-group">
+      <textarea class="form-control" type="text" name="content" rows="3"></textarea>
+    </fieldset>
+    
+  </form>
+
+</div>

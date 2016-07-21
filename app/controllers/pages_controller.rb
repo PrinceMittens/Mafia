@@ -52,6 +52,11 @@ class PagesController < ApplicationController
     end  
     
     def game
-    
+        @all_user = User.all
+        topic = Topic.find(params[:id])
+        user = User.find(topic.user_id)
+        @topic = topic
+        @user = user
+        @posts = topic.Posts
     end
 end
