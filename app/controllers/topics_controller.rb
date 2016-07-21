@@ -37,18 +37,13 @@ class TopicsController < ApplicationController
     new_player.prev_player_id = new_player.next_player_id = -1
     new_player.topic_id = temp_int
     new_player.is_dead = false
-    new_player.save
     #set new player to head (@topic.player_id) if first new player
     if @topic.last_registered_player_id == -1
       @topic.player_id = @topic.last_registered_player_id = new_player.id
     else
-      id_search = @topic.last_registered_player_id
-      while id_search != -1
-        p_search = Player.find(id_search)
-        if p_search.user_id == temp_id
-          return
-        end
-        id_search = p_search.prev_player_id
+      if @topic_id.has_user(temp_id)
+        puts 'error: this function should not even be accessible'
+        return
       end
       new_player.save
       curr_last = Player.find(@topic.last_registered_player_id)

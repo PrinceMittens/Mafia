@@ -9,13 +9,15 @@
     <%= @topic.content %>
   </div>
     <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
-    <% if @topic.category == 1 and user_signed_in? %>
-    <% if false %><%= link_to "Sign up", '/topics/signup', class: "btn btn-lg btn-danger" %><% end %>
-    <form action="/topics/signup">
-    <p><button type="submit" class="btn btn-lg btn-danger">Join Game</button></p>
-    <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
-  </form>
-
+    <% if @topic.category == 1 and user_signed_in? and @topic.user_id != current_user.id %>
+      <% if @topic.has_user(current_user.id) %>
+        <!--%= link_to "Sign up", '/topics/signup', class: "btn btn-lg btn-danger" %-->
+      <% elsif %>
+        <form action="/topics/signup">
+        <p><button type="submit" class="btn btn-lg btn-danger">Join Game</button></p>
+        <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
+        </form>
+      <% end %>
     <% end %>
 </div>
 
