@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get '/makegame',                      to: 'pages#new_game'
   get '/topics/signup'
   get '/topics/del_player'
+  get '/game',                          to: 'pages#game'
   
   
   
