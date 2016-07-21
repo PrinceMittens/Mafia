@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   get '/t/:id',                         to: 'pages#topic'
   get '/posts/create'
   get '/makegame',                      to: 'pages#new_game'
-  get '/topics/signup'                 
+  get '/topics/signup'
+  get '/topics/del_player'
   
   
   

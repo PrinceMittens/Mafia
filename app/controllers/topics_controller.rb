@@ -51,6 +51,7 @@ class TopicsController < ApplicationController
         id_search = p_search.prev_player_id
       end
       new_player.save
+
       curr_last = Player.find(@topic.last_registered_player_id)
       curr_last.next_player_id = new_player.id
       new_player.prev_player_id = curr_last.id
@@ -63,6 +64,21 @@ class TopicsController < ApplicationController
     redirect_to root_path
   end
   
+  # deletes player from a game, must be passed a player id
+  def del_player
+    topic_id = params[:id]
+    user_id = params[:user_id]
+    @topic = Topic.find(topic_id)
+    curr_id = @topic.last_registered_player_id
+    while curr_id != -1
+      curr_player = Player.find(curr_id)
+      if (curr_player.user_id == user_id)
+        @topic.del_player(curr_player.id)
+      end
+      curr_id = curr_player.prev_player_id
+    end
+    @topic.save
+  end
   # change the phase from day to night and vice verse
   # update the phase timer
   # check if game is over

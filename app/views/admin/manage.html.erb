@@ -72,10 +72,9 @@
             <td><%= x.roster_count %></td>
             <td><%= x.phase %></td>
             <td><%= x.who_won %></td>
-            <td><%= Player.find(x.player_last_index.id).player_email%></td>
-            <td><%= x.player_last_index(0).player_email%></td>
-            <td><%= x.player_last_index(1).player_email%></td>
-            <td><%= x.player_last_index(2).player_email%></td>
+            <td><%= x.player_last_index(0)%></td>
+            <td><%= x.player_last_index(1)%></td>
+            <td><%= x.player_last_index(2)%></td>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
