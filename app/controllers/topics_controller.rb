@@ -28,47 +28,47 @@ class TopicsController < ApplicationController
   # Creates player, initializes the player's values, 
   # then inserts the player onto the end of the list
   def signup
-    temp_int = params[:id]
-    @topic = Topic.find(temp_int)
+    this_topic_id = params[:id]
+    topic = Topic.find(this_topic_id)
     new_player = Player.new
-    temp_id = current_user.id.to_i
-    new_player.user_id = temp_id
+    curr_user_id = current_user.id.to_i
+    new_player.user_id = curr_user_id
     new_player.player_email = User.find(new_player.user_id).email
     new_player.prev_player_id = new_player.next_player_id = -1
-    new_player.topic_id = temp_int
+    new_player.topic_id = this_topic_id
     new_player.is_dead = false
     #set new player to head (@topic.player_id) if first new player
-    if @topic.last_registered_player_id == -1
-      @topic.player_id = @topic.last_registered_player_id = new_player.id
+    if topic.last_registered_player_id == -1
+      topic.player_id = topic.last_registered_player_id = new_player.id
     else
-      if @topic_id.has_user(temp_id)
+      if topic.has_user(curr_user_id)
         puts 'error: this function should not even be accessible'
         return
       end
       new_player.save
 
-      curr_last = Player.find(@topic.last_registered_player_id)
+      curr_last = Player.find(topic.last_registered_player_id)
       curr_last.next_player_id = new_player.id
       new_player.prev_player_id = curr_last.id
-      @topic.last_registered_player_id = new_player.id
+      topic.last_registered_player_id = new_player.id
       curr_last.save
     end
-    @topic.roster_count += 1
-    @topic.save
+    topic.roster_count += 1
+    topic.save
     new_player.save
     redirect_to root_path
   end
   
   # deletes player from a game, must be passed a player id
   def del_player
-    topic_id = params[:id]
-    user_id = params[:user_id]
-    @topic = Topic.find(topic_id)
-    curr_id = @topic.last_registered_player_id
+    t_id = params[:t_id]
+    u_id = params[:u_id]
+    curr_topic = Topic.find(t_id)
+    curr_id = curr_topic.last_registered_player_id
     while curr_id != -1
       curr_player = Player.find(curr_id)
-      if (curr_player.user_id == user_id)
-        @topic.del_player(curr_player.id)
+      if (curr_player.user_id == u_id)
+        topic.del_player(curr_player.id)
       end
       curr_id = curr_player.prev_player_id
     end

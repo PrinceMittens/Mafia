@@ -4,30 +4,35 @@ class Topic < ApplicationRecord
     has_many :Posts,  dependent: :destroy
     has_many :Players
     
-    # Check if user is the mod or already in roster 
-    # returns true if user already in
-    def has_user(user_search)
-        if self.user_id == user_search
+    # takes as parameter a user id (not player id)
+    # checks if any of the current list of players
+    # associated with the game contains the specified user id
+    # return true (player already signed up or is associated with the game)
+    # or returns false (player unassociated with game)
+
+    def has_user(user_id)
+        if self.user_id == user_id
             puts 'You are the mod!'
             return true
         end
-        id_search = self.last_registered_player_id
-        if id_search == nil
-            puts "temp_id should not be nil"
+        last_registered_player_id = self.last_registered_player_id
+        if last_registered_player_id == -1
+            puts "No user are signed up for this game."
             return false
         end
-        while id_search != -1
-            p_search = Player.find(id_search)
-            if p_search.user_id == user_search
+        while last_registered_player_id != -1
+            curr_player = Player.find(last_registered_player_id)
+            if curr_player.user_id == user_id
                 return true
             end
-            id_search = p_search.prev_player_id
+            last_registered_player_id = curr_player.prev_player_id
         end
         return false
     end
     
     # function for searching through the roster by index from latest player
     # returns -1 if index is nonexistent, meaning no players in game yet
+    
     def player_last_index(index = 0)
         temp_id = self.last_registered_player_id
         if temp_id == -1 || temp_id == nil
