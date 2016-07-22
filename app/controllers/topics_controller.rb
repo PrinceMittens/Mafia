@@ -60,7 +60,7 @@ class TopicsController < ApplicationController
     @topic.roster_count += 1
     @topic.save
     new_player.save
-    redirect_to root_path
+    redirect_to '/game'
   end
   
   # change the phase from day to night and vice verse
