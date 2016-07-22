@@ -57,7 +57,7 @@ class TopicsController < ApplicationController
     topic.roster_count += 1
     topic.save
     new_player.save
-    redirect_to root_path
+    redirect_to '/game/' + this_topic_id
   end
   
   # deletes player from a game, must be passed a player id
