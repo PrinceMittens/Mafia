@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get '/posts/create'
   get '/makegame',                      to: 'pages#new_game'
   get '/topics/signup'              
-  get '/game',                          to: 'pages#game'
+  get '/game/:id',                      to: 'pages#game'
   
   
   
