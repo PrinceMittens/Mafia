@@ -31,12 +31,13 @@ class Topic < ApplicationRecord
     end
     
     # function for searching through the roster by index from latest player
-    # returns -1 if index is nonexistent, meaning no players in game yet
+    # returns nil if index is nonexistent, meaning no players in game yet
+    # you may get errors if this returns nil, like going to admin page when existing games have no players
     
     def player_last_index(index = 0)
         temp_id = self.last_registered_player_id
         if temp_id == -1 || temp_id == nil
-            return -1
+            return nil
         else
           count = 0
           while count < index
