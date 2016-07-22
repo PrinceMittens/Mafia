@@ -47,6 +47,7 @@ class PagesController < ApplicationController
     def new
         @topic = Topic.new
     end    
+    
     def manual
         
     end  
