@@ -37,6 +37,7 @@ class TopicsController < ApplicationController
     new_player.prev_player_id = new_player.next_player_id = -1
     new_player.topic_id = this_topic_id
     new_player.is_dead = false
+    new_player.save
     #set new player to head (@topic.player_id) if first new player
     if topic.last_registered_player_id == -1
       topic.player_id = topic.last_registered_player_id = new_player.id

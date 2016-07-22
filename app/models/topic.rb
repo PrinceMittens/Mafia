@@ -15,7 +15,7 @@ class Topic < ApplicationRecord
             puts 'You are the mod!'
             return true
         end
-        last_registered_player_id = self.last_registered_player_id
+        last_registered_player_id = self.last_registered_player_id.to_i
         if last_registered_player_id == -1
             puts "No user are signed up for this game."
             return false
@@ -32,7 +32,7 @@ class Topic < ApplicationRecord
     
     # function for searching through the roster by index from latest player
     # returns -1 if index is nonexistent, meaning no players in game yet
-    
+    # returns the player object
     def player_last_index(index = 0)
         temp_id = self.last_registered_player_id
         if temp_id == -1 || temp_id == nil
