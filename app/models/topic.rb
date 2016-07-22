@@ -54,7 +54,8 @@ class Topic < ApplicationRecord
         end
     end
     
-    #pass the correct player ID to be delet
+    #pass the correct player ID to be deleted
+    #return 1 on success, and -1 on fail
     def del_player(player_id_to_del = 0)
         last_id = self.last_registered_player_id
         curr_id = last_id
@@ -69,6 +70,7 @@ class Topic < ApplicationRecord
                     self.roster_count = 0
                     self.save
                     the_player.destroy
+                    return 1
                 elsif prev_p_id == -1
                     # if the id is of the first player but there are more than 1 players
                     self.player_id = next_p_id
@@ -78,6 +80,7 @@ class Topic < ApplicationRecord
                     next_player.prev_player_id = -1
                     the_player.destroy
                     next_player.save
+                    return 1
                 elsif next_p_id == -1 
                     # if the id is of the last player but there are more than 1 players
                     prev_player = Player.find(prev_p_id)
@@ -87,6 +90,7 @@ class Topic < ApplicationRecord
                     self.save
                     prev_player.save
                     the_player.destroy
+                    return 1
                 else
                     #if the id is of a player nested between two other players
                     self.roster_count -= 1
@@ -98,9 +102,11 @@ class Topic < ApplicationRecord
                     self.save
                     prev_player.save
                     next_player.save
+                    return 1
                 end
             end
         end
+        return -1
     end
 
 

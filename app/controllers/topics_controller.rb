@@ -62,18 +62,17 @@ class TopicsController < ApplicationController
   
   # deletes player from a game, must be passed a player id
   def del_player
-    t_id = params[:t_id]
-    u_id = params[:u_id]
-    curr_topic = Topic.find(t_id)
+    topic_id = params[:id]
+    curr_topic = Topic.find(topic_id)
     curr_id = curr_topic.last_registered_player_id
     while curr_id != -1
       curr_player = Player.find(curr_id)
-      if (curr_player.user_id == u_id)
-        topic.del_player(curr_player.id)
+      if (curr_player.user_id == current_user.id)
+        curr_topic.del_player(curr_player.id)
       end
       curr_id = curr_player.prev_player_id
     end
-    @topic.save
+    curr_topic.save
   end
   # change the phase from day to night and vice verse
   # update the phase timer
