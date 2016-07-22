@@ -73,7 +73,10 @@ class TopicsController < ApplicationController
       curr_id = curr_player.prev_player_id
     end
     curr_topic.save
+    redirect_to root_path
   end
+  
+  
   # change the phase from day to night and vice verse
   # update the phase timer
   # check if game is over
@@ -94,6 +97,7 @@ class TopicsController < ApplicationController
       who_won = 1
     # else if other win condition 
     end
+    redirect_to root_path
   end
   
   
