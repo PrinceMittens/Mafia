@@ -19,11 +19,12 @@
         <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
         </form>
       <% end %>
-    <form action="/topics/del_player">
-    <p><button type="submit" class="btn btn-lg btn-danger">Leave Game</button></p>
-    <input type="hidden" name="id" value='<%= @topic.id %>' />
-    </form>
-
+      <% if @topic.has_user(current_user.id) %>
+        <form action="/topics/leave_game">
+        <p><button type="submit" class="btn btn-lg btn-danger">Leave Game</button></p>
+        <input type="hidden" name="id" value='<%= @topic.id %>' />
+        </form>
+      <% end %>
     <% end %>
 </div>
 
@@ -39,7 +40,7 @@
 <% end %>
 
 <div>
-  
+  <% if user_signed_in? %>
   <form action="../posts/create">
     <p><button type="submit" class="btn btn-primary">Reply</button></p>
     <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>' />
@@ -49,6 +50,9 @@
     </fieldset>
     
   </form>
-
+  <% else %>
+  	<%= link_to "Create an account", new_user_registration_path, class: "btn btn-lg btn-info" %> 
+    <%= link_to "Log in", new_user_session_path, class: "btn btn-lg btn-primary" %>
+  <% end %>
 </div>
 

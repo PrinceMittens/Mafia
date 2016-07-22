@@ -187,9 +187,7 @@ class AdminController < ApplicationController
     def delete_player
         to_del = Player.find(params[:id])
         topic = Topic.find(to_del.topic_id)
-        topic.roster_count -= 1
-        topic.save
-        to_del.destroy
+        topic.del_player(to_del)
         redirect_to admin_path
     end
     

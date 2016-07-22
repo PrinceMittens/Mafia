@@ -71,9 +71,11 @@
             <td><%= x.roster_count %></td>
             <td><%= x.phase %></td>
             <td><%= x.who_won %></td>
+            <% if x.player_last_index(0) != nil %>
             <td><%= x.player_last_index(0).player_email%></td>
             <td><%= x.player_last_index(1).player_email%></td>
             <td><%= x.player_last_index(2).player_email%></td>
+            <% end %>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
@@ -150,7 +152,7 @@
             <td><%= x.id %></td>
             <td><%= User.find(x.user_id).name %></td>
             <td><%= Topic.find(x.topic_id).title %></td>
-            <td><a href="/admin/delete_player/<%= x.id %>">[x]</a></td>
+            <td><a href="/topics/del_player/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>
     </table>
