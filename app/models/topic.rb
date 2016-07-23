@@ -57,8 +57,10 @@ class Topic < ApplicationRecord
     #pass the correct player ID to be deleted
     #return 1 on success, and -1 on fail
     def del_player(player_id_to_del = 0)
-        last_id = self.last_registered_player_id
-        curr_id = last_id
+        curr_id = self.last_registered_player_id
+        if curr_id == nil
+            return -2
+        end
         while curr_id != -1
             the_player = Player.find(curr_id)
             if curr_id == player_id_to_del
@@ -105,6 +107,7 @@ class Topic < ApplicationRecord
                     return 1
                 end
             end
+            curr_id = the_player.prev_player_id
         end
         return -1
     end
