@@ -8,7 +8,7 @@ class Topic < ApplicationRecord
     # checks if any of the current list of players
     # associated with the game contains the specified user id
     # return true (player already signed up or is associated with the game)
-    # or returns false (player unassociated with game)
+    # or returns nil (player unassociated with game)
 
     def has_user(user_id)
         if self.user_id == user_id
@@ -31,7 +31,6 @@ class Topic < ApplicationRecord
     end
     
     # function for searching through the roster by index from latest player
-    # returns -1 if index is nonexistent, meaning no players in game yet
     # returns the player object
     # returns nil if index is nonexistent, meaning no players in game yet
     # you may get errors if this returns nil, like going to admin page when existing games have no players
@@ -52,6 +51,21 @@ class Topic < ApplicationRecord
           end
           return Player.find(temp_id)
         end
+    end
+    
+    # function for searching through the roster by player id
+    # returns the player object
+    # returns nil if index is nonexistent, meaning no players in game yet
+
+    def player_search_id(search_id)
+        temp_id = self.last_registered_player_id
+        while temp_id != search_id && temp_id != -1 && temp_id != nil
+            temp_id = Player.find(temp_id).prev_player_id
+        end
+        if temp_id == search_id
+           return Player.find(temp_id)
+        end
+        return nil
     end
     
     #pass the correct player ID to be deleted
@@ -96,14 +110,16 @@ class Topic < ApplicationRecord
                     self.roster_count -= 1
                     prev_player = Player.find(prev_p_id)
                     next_player = Player.find(next_p_id)
-                    prev_player.next_player_id = next_player.player_id
-                    next_player.prev_player_id = prev_player.player_id
+                    prev_player.next_player_id = next_p_id
+                    next_player.prev_player_id = prev_p_id
                     the_player.destroy
                     self.save
                     prev_player.save
                     next_player.save
                     return 1
                 end
+            else
+                curr_id = 
             end
         end
         return -1
