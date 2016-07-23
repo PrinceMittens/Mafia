@@ -2,25 +2,28 @@
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @user.name %>
+    <%= 'Player Count: ' + @topic.roster_count.to_s %>
   </div>
   <div class="panel-body">
-    <%= @topic.content %>
+    <%= 'Day Phase: ' + @topic.day_timelimit.to_s + ', Night Phase: ' + @topic.night_timelimit.to_s %>
   </div>
 </div>
 
-<% @posts.each do |x| %>
+<% roster_id = @topic.last_registered_player_id %>
+<% while roster_id != -1 %>
+  <% roster_p = @all_player.find(roster_id) %>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <%= @all_user.find(x.user_id).name %>
+      <%= @all_user.find(roster_p.user_id).name %>
     </div>
-    <div class="panel-body">
-      <%= x.content %>
-    </div>
+    <!--div class="panel-body"-->
+      <!--%= x.content %>
+    </div-->
   </div>
+  <% roster_id = roster_p.prev_player_id %>
 <% end %>
 
-<div>
+<!--div>
   
   <form action="../posts/create">
     <p><button type="submit" class="btn btn-primary">Reply</button></p>
@@ -32,4 +35,4 @@
     
   </form>
 
-</div>
+</div-->

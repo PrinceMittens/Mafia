@@ -53,7 +53,7 @@ class Topic < ApplicationRecord
         end
     end
     
-    # function for searching through the roster by player id
+    # function for searching through the roster by user id
     # returns the player object
     # returns nil if index is nonexistent, meaning no players in game yet
 
@@ -120,8 +120,6 @@ class Topic < ApplicationRecord
                     next_player.save
                     return 1
                 end
-            else
-                curr_id = 
             end
             curr_id = the_player.prev_player_id
         end
