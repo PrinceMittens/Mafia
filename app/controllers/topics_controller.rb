@@ -61,7 +61,7 @@ class TopicsController < ApplicationController
   end
   
   # deletes player from a game, must be passed a player id
-  def del_player
+  def leave_game
     topic_id = params[:id]
     curr_topic = Topic.find(topic_id)
     curr_id = curr_topic.last_registered_player_id
@@ -76,7 +76,7 @@ class TopicsController < ApplicationController
     redirect_to root_path
   end
   
-  
+
   # change the phase from day to night and vice verse
   # update the phase timer
   # check if game is over
