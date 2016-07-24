@@ -35,16 +35,7 @@ document.getElementById("mySidenav2").style.width = "100px";
 generate_table();
 </script>
 
-<p><%= @topic.title %></p>
 
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <%= 'Player Count: ' + @topic.roster_count.to_s %>
-  </div>
-  <div class="panel-body">
-    <%= 'Day Phase: ' + @topic.day_timelimit.to_s + ', Night Phase: ' + @topic.night_timelimit.to_s %>
-  </div>
-</div>
 
 <div>
   <h1>Creating a New Game</h1>
