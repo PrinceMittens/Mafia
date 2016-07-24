@@ -82,12 +82,8 @@ class AdminController < ApplicationController
     
     # to add a player to player table when someone joins
     def addplayer_general topic_id, user_id
-        player = Player.new
-        player.topic_id = topic_id
-        player.user_id = user_id
-        player.save
         topic = Topic.find(topic_id)
-        topic.roster_count = topic.roster_count + 1
+        topic.create_player(user_id)
         topic.save
     end
     

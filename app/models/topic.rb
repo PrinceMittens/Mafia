@@ -10,6 +10,36 @@ class Topic < ApplicationRecord
     # return true (player already signed up or is associated with the game)
     # or returns nil (player unassociated with game)
 
+    def create_player curr_user_id
+        new_player = Player.new
+        new_player.user_id = curr_user_id
+        new_player.player_email = User.find(new_player.user_id).email
+        new_player.prev_player_id = new_player.next_player_id = -1
+        new_player.topic_id = self.id
+        new_player.is_dead = false
+        new_player.save
+        #set new player to head if first new player
+        if self.last_registered_player_id == -1
+          self.player_id = self.last_registered_player_id = new_player.id
+        else
+          if self.has_user(curr_user_id)
+            puts 'error: this function should not even be accessible'
+            return
+          end
+          new_player.save
+    
+          curr_last = Player.find(self.last_registered_player_id)
+          curr_last.next_player_id = new_player.id
+          new_player.prev_player_id = curr_last.id
+          self.last_registered_player_id = new_player.id
+          curr_last.save
+        end
+        self.roster_count += 1
+        self.save
+        new_player.save
+        return
+    end
+
     def has_user(user_id)
         if self.user_id == user_id
             puts 'You are the mod!'

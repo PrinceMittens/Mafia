@@ -17,6 +17,7 @@
         <form action="/topics/signup">
         <p><button type="submit" class="btn btn-lg btn-danger">Join Game</button></p>
         <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
+        <input type="hidden" name="user_id" value= '<%= current_user.id %>' />
         </form>
       <% end %>
       <% if @topic.has_user(current_user.id) %>
