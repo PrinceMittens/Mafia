@@ -30,6 +30,10 @@ generate_table();
     <%= @user.name %>
   </div>
   <div class="panel-body">
+    Number of Mafia: <%= @topic.num_mafia %> <br>
+    Number of Town: <%= @topic.num_town %> <br>
+    Power Roles: 
+    <br><br>
     Players signed up:
     <% for i in 0..((@topic.num_mafia + @topic.num_town)-1) %>
       <br><%= (i+1).to_s + '. '%>
