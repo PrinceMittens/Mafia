@@ -10,6 +10,42 @@ hr {
 }
 </style>
 </head>
+
+<div id="mySidenav2" class="sidenav">
+  <a></a><a></a><a></a>
+  <a href="javascript:void(0)" onclick="openNav()">Vote here!</a>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a></a><a></a><a></a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a></a>
+  <a href="javascript:void(0)" id="yourvote" onclick="voteFor(-1)">Your Vote: none</a>
+  <table id="voteinterfacetable"><tr></tr></table>
+</div>
+
+<script>
+var voteSidebarPlayers = ["player 1", "player 2", "player 3", "player 4"];
+var voteSidebarVotes = [0, 0, 0, 0];
+var yourvote = -1;
+</script>
+<script src="votesidebar.js"></script>
+<script>
+document.getElementById("mySidenav2").style.width = "100px";
+generate_table();
+</script>
+
+<p><%= @topic.title %></p>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <%= 'Player Count: ' + @topic.roster_count.to_s %>
+  </div>
+  <div class="panel-body">
+    <%= 'Day Phase: ' + @topic.day_timelimit.to_s + ', Night Phase: ' + @topic.night_timelimit.to_s %>
+  </div>
+</div>
+
 <div>
   <h1>Creating a New Game</h1>
   <form action="/topics/create">
