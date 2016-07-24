@@ -40,23 +40,26 @@ generate_table();
     <div class="panel-heading">
       <%= @all_user.find(roster_p.user_id).name %>
     </div>
-    <!--div class="panel-body"-->
-      <!--%= x.content %>
-    </div-->
+    <div class="panel-body">
+      <% if @topic.phase == 0 %>
+        <%= 'Vote Count: ' + roster_p.vote_count.to_s %>
+        <%= 'Voted For: ' + @all_user.find(@all_player.find(roster_p.vote_who).user_id).name %>
+      <% end %>  
+    </div>
   </div>
   <% roster_id = roster_p.prev_player_id %>
 <% end %>
 
-<!--div>
+<div>
   
-  <form action="../posts/create">
+  <!-- form action="../posts/create">
     <p><button type="submit" class="btn btn-primary">Reply</button></p>
-    <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>' />
+    <input type="hidden" name="topic_id" value='--> <!-- %= request.original_url.split('/').last %>' />
     
     <fieldset class="form-group">
       <textarea class="form-control" type="text" name="content" rows="3"></textarea>
     </fieldset>
     
-  </form>
+  </form -->
 
-</div-->
+</div>
