@@ -71,10 +71,12 @@
             <td><%= x.roster_count %></td>
             <td><%= x.phase %></td>
             <td><%= x.who_won %></td>
-            <% if x.player_last_index(0) != nil %>
-            <td><%= x.player_last_index(0).player_email%></td>
-            <td><%= x.player_last_index(1).player_email%></td>
-            <td><%= x.player_last_index(2).player_email%></td>
+            <% for i in 0..2 %>
+                <% if x.player_last_index(i) != nil %> 
+                    <td><%= x.player_last_index(i).player_email%></td>
+                <% else %>
+                    <td>No one</td>
+                <% end %>
             <% end %>
             <td><a href="/admin/delete_topic/<%= x.id %>">[x]</a></td>
         </tr>

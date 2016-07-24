@@ -30,7 +30,15 @@ generate_table();
     <%= @user.name %>
   </div>
   <div class="panel-body">
-    <%= @topic.content %>
+    Players signed up:
+    <% for i in 0..((@topic.num_mafia + @topic.num_town)-1) %>
+      <br><%= (i+1).to_s + '. '%>
+      <% if @topic.player_last_index(i) != nil %> 
+        <%= @topic.player_last_index(i).player_email%>
+      <% end %>
+    <% end %>
+    <br><br>
+    Game Creator's Notes:<br> <%= @topic.content %>
   </div>
     <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
     <% if @topic.category == 1 and user_signed_in? and @topic.user_id != current_user.id %>

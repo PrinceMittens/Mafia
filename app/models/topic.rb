@@ -4,11 +4,10 @@ class Topic < ApplicationRecord
     has_many :Posts,  dependent: :destroy
     has_many :Players
     
-    # takes as parameter a user id (not player id)
-    # checks if any of the current list of players
-    # associated with the game contains the specified user id
-    # return true (player already signed up or is associated with the game)
-    # or returns nil (player unassociated with game)
+    
+    # Adds a player to the player list of this topic
+    # Takes as parameter the user id of the user being added
+    # no return value
 
     def create_player curr_user_id
         new_player = Player.new
@@ -40,6 +39,12 @@ class Topic < ApplicationRecord
         return
     end
 
+    # takes as parameter a user id (not player id)
+    # checks if any of the current list of players
+    # associated with the game contains the specified user id
+    # return true (player already signed up or is associated with the game)
+    # or returns nil (player unassociated with game)
+
     def has_user(user_id)
         if self.user_id == user_id
             puts 'You are the mod!'
@@ -68,6 +73,10 @@ class Topic < ApplicationRecord
     def player_last_index(index = 0)
         temp_id = self.last_registered_player_id
         if temp_id == -1 || temp_id == nil
+            #if no one is signed up
+            return nil
+        elsif index > self.roster_count - 1
+            #if trying to find a nonexistent index
             return nil
         else
           count = 0
