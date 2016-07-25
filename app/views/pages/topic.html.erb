@@ -23,27 +23,28 @@ generate_table();
 </script>
 
 
-<p><%= @topic.title %></p>
+<p>Thread : <%= @topic.title %></p>
 
 <div class="panel panel-default">
   <div class="panel-heading">
     <%= @user.name %>
   </div>
-  <div class="panel-body">
-    Number of Mafia: <%= @topic.num_mafia %> <br>
-    Number of Town: <%= @topic.num_town %> <br>
-    Power Roles: 
-    <br><br>
-    Players signed up:
-    <% for i in 0..((@topic.num_mafia + @topic.num_town)-1) %>
-      <br><%= (i+1).to_s + '. '%>
-      <% if @topic.player_last_index(i) != nil %> 
-        <%= @topic.player_last_index(i).player_email%>
+  <% if @topic.category == 1 %>
+    <div class="panel-body">
+      Number of Mafia: <%= @topic.num_mafia %> <br>
+      Number of Town: <%= @topic.num_town %> <br>
+      Power Roles: 
+      <br><br>
+      Players signed up:
+      <% for i in 0..((@topic.num_mafia + @topic.num_town)-1) %>
+        <br><%= (i+1).to_s + '. '%>
+        <% if @topic.player_last_index(i) != nil %> 
+          <%= @topic.player_last_index(i).player_email%>
+        <% end %>
       <% end %>
-    <% end %>
-    <br><br>
-    Game Creator's Notes:<br> <%= @topic.content %>
-  </div>
+      <br><br>
+      Game Creator's Notes:<br> <%= @topic.content %>
+    </div>
     <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
     <% if @topic.category == 1 and user_signed_in? and @topic.user_id != current_user.id %>
       <% if @topic.has_user(current_user.id) %>
@@ -63,6 +64,11 @@ generate_table();
         </form>
       <% end %>
     <% end %>
+  <% elsif %>
+    <div class="panel-body">
+      <%= @topic.content %>
+    </div>
+  <% end %>
 </div>
 
 <% @posts.each do |x| %>
