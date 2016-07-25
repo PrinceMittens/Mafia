@@ -29,34 +29,9 @@ class TopicsController < ApplicationController
   # then inserts the player onto the end of the list
   def signup
     this_topic_id = params[:id]
+    this_user_id = params[:user_id]
     topic = Topic.find(this_topic_id)
-    new_player = Player.new
-    curr_user_id = current_user.id.to_i
-    new_player.user_id = curr_user_id
-    new_player.player_email = User.find(new_player.user_id).email
-    new_player.prev_player_id = new_player.next_player_id = -1
-    new_player.topic_id = this_topic_id
-    new_player.is_dead = false
-    new_player.save
-    #set new player to head (@topic.player_id) if first new player
-    if topic.last_registered_player_id == -1
-      topic.player_id = topic.last_registered_player_id = new_player.id
-    else
-      if topic.has_user(curr_user_id)
-        puts 'error: this function should not even be accessible'
-        return
-      end
-      new_player.save
-
-      curr_last = Player.find(topic.last_registered_player_id)
-      curr_last.next_player_id = new_player.id
-      new_player.prev_player_id = curr_last.id
-      topic.last_registered_player_id = new_player.id
-      curr_last.save
-    end
-    topic.roster_count += 1
-    topic.save
-    new_player.save
+    topic.create_player(this_user_id)
     redirect_to '/game/' + this_topic_id
   end
   

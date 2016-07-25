@@ -1,35 +1,99 @@
+<div id="mySidenav2" class="sidenav">
+  <a></a><a></a><a></a>
+  <a href="javascript:void(0)" onclick="openNav()">Vote here!</a>
+</div>
+
+<div id="mySidenav" class="sidenav">
+  <a></a><a></a><a></a>
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a></a>
+  <a href="javascript:void(0)" id="yourvote" onclick="voteFor(-1)">Your Vote: none</a>
+  <table id="voteinterfacetable"><tr></tr></table>
+</div>
+
+<script>
+var voteSidebarPlayers = ["player 1", "player 2", "player 3", "player 4"];
+var voteSidebarVotes = [0, 0, 0, 0];
+var yourvote = -1;
+</script>
+<script src="votesidebar.js"></script>
+<script>
+document.getElementById("mySidenav2").style.width = "100px";
+generate_table();
+</script>
+
 <p><%= @topic.title %></p>
 
 <div class="panel panel-default">
   <div class="panel-heading">
-    <%= @user.name %>
+    <%= 'Player Count: ' + @topic.roster_count.to_s %>
   </div>
   <div class="panel-body">
-    <%= @topic.content %>
+    <%= 'Day Phase: ' + @topic.day_timelimit.to_s + ', Night Phase: ' + @topic.night_timelimit.to_s %>
   </div>
 </div>
 
-<% @posts.each do |x| %>
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <%= @all_user.find(x.user_id).name %>
+
+<!-- Trying Things -->
+<div class="container">
+  <h2>Dynamic Tabs</h2>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+    <li><a data-toggle="tab" href="#menu1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#menu2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#menu3">Menu 3</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+      <h3>HOME</h3>
+      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
     </div>
-    <div class="panel-body">
-      <%= x.content %>
+    <div id="menu1" class="tab-pane fade">
+      <h3>Menu 1</h3>
+      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <h3>Menu 2</h3>
+      <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam.</p>
+    </div>
+    <div id="menu3" class="tab-pane fade">
+      <h3>Menu 3</h3>
+      <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
     </div>
   </div>
+</div>
+
+
+<% roster_id = @topic.last_registered_player_id %>
+<% while roster_id != -1 %>
+  <% roster_p = @all_player.find(roster_id) %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <%= @all_user.find(roster_p.user_id).name %>
+    </div>
+    <div class="panel-body">
+      <% if @topic.phase == 0 %>
+        <%= 'Vote Count: ' + roster_p.vote_count.to_s %>
+        <%= 'Voted For: ' + @all_user.find(@all_player.find(roster_p.vote_who).user_id).name %>
+      <% end %>  
+    </div>
+  </div>
+  <% roster_id = roster_p.prev_player_id %>
 <% end %>
 
 <div>
   
-  <form action="../posts/create">
+  <!-- form action="../posts/create">
     <p><button type="submit" class="btn btn-primary">Reply</button></p>
-    <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>' />
+    <input type="hidden" name="topic_id" value='--> <!-- %= request.original_url.split('/').last %>' />
     
     <fieldset class="form-group">
       <textarea class="form-control" type="text" name="content" rows="3"></textarea>
     </fieldset>
     
-  </form>
+  </form -->
 
 </div>
+
+
