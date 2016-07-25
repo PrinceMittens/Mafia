@@ -8,7 +8,6 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       
       t.string :role
       t.string :affiliation
-      t.integer :vote_count
       t.boolean :is_dead
       t.integer :vote_who
       t.integer :vote_count

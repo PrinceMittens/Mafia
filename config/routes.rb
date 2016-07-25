@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/topics/signup'
   get '/topics/leave_game'
   get '/game/:id',                      to: 'pages#game'
+  get '/topics/start_game'
+  get '/topics/vote'
   
   
   

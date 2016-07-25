@@ -36,12 +36,35 @@ class PagesController < ApplicationController
     helper_method :category_real
     
     def topic
+        @all_player = Player.all
         @all_user = User.all
         topic = Topic.find(params[:id])
         user = User.find(topic.user_id)
+        player = Player.where(:topic_id => topic.id, :user_id => current_user.id)
         @topic = topic
         @user = user
         @posts = topic.Posts
+        
+        @game_players = Player.where(:topic_id => topic.id, :is_dead => false)
+        @mafia_players = Player.where(:topic_id => topic.id, :affiliation => 'mafia', :is_dead => false)
+        @town_players = Player.where(:topic_id => topic.id, :affiliation => 'town', :is_dead => false)
+        @vote_list = Array.new
+        
+        if topic.phase == 0
+            @vote_list = @game_players
+        elsif topic.phase == 1 && player.affiliation == 'mafia'
+            @vote_list = @town_players
+        end
+        
+        
+        
+        if topic.category == 0
+            render 'pages/topic'
+        elsif topic.category == 1
+            render 'pages/topic'
+        elsif topic.category == 2
+            render 'pages/game'
+        end
     end
     
     def new

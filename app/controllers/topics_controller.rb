@@ -32,7 +32,7 @@ class TopicsController < ApplicationController
     this_user_id = params[:user_id]
     topic = Topic.find(this_topic_id)
     topic.create_player(this_user_id)
-    redirect_to '/game/' + this_topic_id
+    redirect_to '/t/' + this_topic_id
   end
   
   # deletes player from a game, must be passed a player id
@@ -48,7 +48,7 @@ class TopicsController < ApplicationController
       curr_id = curr_player.prev_player_id
     end
     curr_topic.save
-    redirect_to root_path
+    redirect_to '/t/' + topic_id
   end
   
 
@@ -83,5 +83,144 @@ class TopicsController < ApplicationController
   
   def edit
     
+  end
+
+  def start_game
+    topic = Topic.find(params[:id])
+    topic.category = 2
+    topic.phase = 1
+    topic.num_players_alive = topic.num_mafia + topic.num_town
+    topic.save
+    
+    players = Player.where(:topic_id => topic.id).shuffle
+    
+    mafia_count = topic.num_mafia
+    
+    players.each do |x|
+      x.is_dead = false
+      x.vote_count = 0
+      x.vote_who = -1
+      if mafia_count > 0
+        x.affiliation = 'mafia'
+        mafia_count -= 1
+      else
+        x.affiliation = 'town'
+      end
+      x.save
+    end
+      
+      
+    redirect_to '/t/' + params[:id]
+  end
+  
+  
+  
+  ## general functions for game flow
+  
+  # to update player table when someone votes
+  def update_vote_general player_id, topic_id, vote_who
+      player_voter = Player.find(player_id)
+      player_voter.vote_who = vote_who
+      player_voter.save
+      player_voted = Player.find(vote_who)
+      player_voted.vote_count += 1
+      player_voted.save
+      
+      topic = Topic.find(topic_id)
+      phase = topic.phase
+      majority = 0
+      if phase == 0
+          majority = topic.num_players_alive.to_i / 2 + 1
+      elsif phase == 1
+          majority = topic.num_mafia / 2 + 1
+      end
+      
+      content = player_id.to_s + " has voted for " + vote_who.to_s
+      post_system_general(topic_id, content)
+      
+      if player_voted.vote_count >= majority
+          content = "Majority reached"
+          post_system_general(topic_id, content)
+          next_phase_general(topic_id, player_voted.id)
+      end
+  end
+  
+  # to move to the next phase
+  def next_phase_general topic_id, vote_result
+      game = Topic.find(topic_id)
+      game.phase = (game.phase + 1) % 2       # change phase 0->1 or 1->0
+
+      dead_player = Player.find(vote_result)
+      dead_player.is_dead = true
+      dead_player.save
+      
+      game.num_players_alive = game.num_players_alive - 1               # keep track of number of remaining players
+
+      if dead_player.affiliation == "mafia"          # going to day phase
+          game.num_mafia = game.num_mafia - 1   # one town killed
+      elsif dead_player.affiliation == "town"        # going to night phase 
+          game.num_town = game.num_town - 1
+      end
+      game.save
+      
+      
+      content = "Player " + dead_player.id.to_s + " died. End of phase, changed to " + game.phase.to_s + ". Number of mafia: " + game.num_mafia.to_s + ". Number of town: " + game.num_town.to_s + "."
+      post_system_general(topic_id, content)
+      
+      game_players = Player.where(:topic_id => topic_id, :is_dead => false)
+      game_players.each do |player|
+           player.vote_count = 0
+           player.save
+      end
+      
+      if game.num_town <= game.num_mafia
+          game_end_general(topic_id, 0)
+      elsif game.num_mafia == 0
+          game_end_general(topic_id, 1)
+      end
+      
+      
+  end
+  
+  def game_end_general topic_id, who_won
+      topic = Topic.find(topic_id)
+      topic.who_won = who_won
+      topic.category = 2
+      topic.save
+      if who_won == 1
+          content = "The game has ended! Town won"
+      elsif who_won == 0
+          content = "The game has ended! Mafia won"
+      end
+      post_system_general(topic_id, content)
+      
+  end
+  
+  def post_system_general topic_id, content
+      new_post = Post.new
+      new_post.user_id = Topic.find(topic_id).user_id
+      new_post.topic_id = topic_id
+      new_post.content = content
+      new_post.save
+  end
+  
+      
+  # call from view
+  def create_player
+      addplayer_general(params[:topic_id], params[:user_id])
+      redirect_to admin_path
+  end
+  
+  def delete_player
+      player_id = params[:id]
+      player_to_del = Player.find(player_id)
+      topic = Topic.find(player_to_del.topic_id)
+      topic.del_player(player_to_del.id) == -1
+      redirect_to admin_path
+  end
+  
+  def vote
+      update_vote_general(params[:player_id], params[:topic_id], params[:vote_who])
+      redirect_to '/t/' + params[:topic_id]
   end
 end
