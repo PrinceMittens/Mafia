@@ -48,13 +48,16 @@
         Finished Games
       <% end %>
     <% elsif current_page?(t_new_path) %>
+      Category : 
       <%= link_to "Discussions", "/c/0" %>
     <% elsif current_page?(makegame_path) %>
+      Category : 
       <%= link_to "New Games", "/c/1" %>
     <% elsif url[-2] == 't' %>
       <% curr_t = Topic.find(url[-1]) %>
       <% category = curr_t.category %>
       <% name = curr_t.title %>
+      Category : 
       <% if category == 0 %>
         <%= link_to "Discussions", "/c/0" %>
       <% elsif category == 1 %>
