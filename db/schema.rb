@@ -18,9 +18,9 @@ ActiveRecord::Schema.define(version: 20160717231526) do
     t.string   "player_email"
     t.string   "role"
     t.string   "affiliation"
-    t.integer  "vote_count"
     t.boolean  "is_dead"
     t.integer  "vote_who"
+    t.integer  "vote_count"
     t.integer  "next_player_id"
     t.integer  "prev_player_id"
     t.datetime "created_at",     null: false
