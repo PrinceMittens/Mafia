@@ -35,7 +35,7 @@ generate_table();
 
 
 <!-- Trying Things -->
-<div class="container">
+<div>
   <h2>Dynamic Tabs</h2>
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Posts</a></li>
@@ -74,20 +74,23 @@ generate_table();
       <!-- VOTING -->
       <h3>Vote For</h3>
       
-      <form action="/topics/vote">
-        
-        <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
-        <input type="hidden" name="player_id" value='<%= Player.where(:topic_id => request.original_url.split('/').last, :user_id => current_user.id).first.id %>'>
-        <% @vote_list.each do |x| %>
-          <div class="radio">
-            <label>
-              <input type="radio" name="vote_who" id="optionsRadios1" value= <%= x.id %>>
-              <%= User.find(x.user_id).name %> (Current vote count: <%= x.vote_count %>)
-            </label>
-          </div>
-        <% end %>
-        <p><button type="submit" class="btn btn-primary">Vote</button></p>
-      </form>
+      
+      <% if Topic.find(request.original_url.split('/').last).has_user(current_user.id) %>
+        <form action="/topics/vote">
+          
+          <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
+          <input type="hidden" name="player_id" value='<%= Player.where(:topic_id => request.original_url.split('/').last, :user_id => current_user.id).first.id %>'>
+          <% @vote_list.each do |x| %>
+            <div class="radio">
+              <label>
+                <input type="radio" name="vote_who" id="optionsRadios1" value= <%= x.id %>>
+                <%= User.find(x.user_id).name %> (Current vote count: <%= x.vote_count %>)
+              </label>
+            </div>
+          <% end %>
+          <p><button type="submit" class="btn btn-primary">Vote</button></p>
+        </form>
+      <% end %>
     
     </div>
     
