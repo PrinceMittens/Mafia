@@ -95,12 +95,12 @@ class Topic < ApplicationRecord
     # returns the player object
     # returns nil if index is nonexistent, meaning no players in game yet
 
-    def player_search_id(search_id)
+    def player_search_id(player_id)
         temp_id = self.last_registered_player_id
-        while temp_id != search_id && temp_id != -1 && temp_id != nil
+        while temp_id != player_id && temp_id != -1 && temp_id != nil
             temp_id = Player.find(temp_id).prev_player_id
         end
-        if temp_id == search_id
+        if temp_id == player_id
            return Player.find(temp_id)
         end
         return nil
