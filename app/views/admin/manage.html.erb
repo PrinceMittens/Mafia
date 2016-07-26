@@ -149,6 +149,10 @@
             <th>Topic Name</th>
             <th>Prev. ID</th>
             <th>Next ID</th>
+            <th>Vote Count</th>
+            <th>Vote Who</th>
+            <th>Affiliation</th>
+            <th>Role</th>
             <th>[x]</th>
         </tr>
         <% @all_player.each do |x| %>
@@ -158,6 +162,10 @@
             <td><%= Topic.find(x.topic_id).title %></td>
             <td><%= x.prev_player_id %></td>
             <td><%= x.next_player_id %></td>
+            <td><%= x.vote_count %></td>
+            <td><%= x.vote_who %></td>
+            <td><%= x.affiliation %></td>
+            <td><%= x.role %></td>
             <td><%= link_to "[x]", getdeleted_path(:id => x.id) %><td>
             </tr>
         <% end %>

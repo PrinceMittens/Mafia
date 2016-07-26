@@ -25,8 +25,6 @@ class Topic < ApplicationRecord
             puts 'error: this function should not even be accessible'
             return
           end
-          new_player.save
-    
           curr_last = Player.find(self.last_registered_player_id)
           curr_last.next_player_id = new_player.id
           new_player.prev_player_id = curr_last.id
@@ -107,7 +105,7 @@ class Topic < ApplicationRecord
         return nil
     end
     
-    #pass the correct player ID to be deleted
+    # pass the correct player ID to be deleted
     #return 1 on success, and -1 on fail
     def del_player(player_id_to_del = 0)
         curr_id = self.last_registered_player_id
@@ -165,5 +163,159 @@ class Topic < ApplicationRecord
         return -1
     end
 
+# The following are day/night phase timer functions
+# Each function takes a day_timelimit or night_timelimit
+# argument, which is a variable of a Topic object
 
+    # returns the day_timelimit as a string
+    def day_length day_timelimit
+        case day_timelimit
+        when 1
+            return "336 hours (2 weeks)"
+        when 2
+            return "168 hours (1 week)"
+        when 3
+            return "120 hours (5 days)"
+        when 4
+            return "72 hours (3 days)"
+        when 5
+            return "48 hours (2 days)"
+        when 6
+            return "24 hours (1 day)"
+        when 7
+            return "12 hours"
+        when 8
+            return "6 hours"
+        when 9
+            return "3 hours"
+        when 10
+            return "2 hours"
+        when 11
+            return "1 hour"
+        when 12
+            return "30 minutes"
+        when 13
+            return "15 minutes"
+        when 14
+            return "10 minutes"
+        when 15
+            return "5 minutes"
+        else
+            return "Error"
+        end
+    end
+    
+    # returns the night_timelimit as a string
+    def night_length night_timelimit
+        case day_timelimit
+        when 1
+            return "336 hours (2 weeks)"
+        when 2
+            return "168 hours (1 week)"
+        when 3
+            return "120 hours (5 days)"
+        when 4
+            return "72 hours (3 days)"
+        when 5
+            return "48 hours (2 days)"
+        when 6
+            return "24 hours (1 day)"
+        when 7
+            return "12 hours"
+        when 8
+            return "6 hours"
+        when 9
+            return "3 hours"
+        when 10
+            return "2 hours"
+        when 11
+            return "1 hour"
+        when 12
+            return "30 minutes"
+        when 13
+            return "15 minutes"
+        when 14
+            return "10 minutes"
+        when 15
+            return "5 minutes"
+        else
+            return "Error"
+        end
+    end
+
+    # returns the day time limit in seconds
+    def day_in_secs day_timelimit
+        case day_timelimit
+        when 1
+            return 1209600
+        when 2
+            return 604800
+        when 3
+            return 432000
+        when 4
+            return 259200
+        when 5
+            return 172800
+        when 6
+            return 86400
+        when 7
+            return 43200
+        when 8
+            return 21600
+        when 9
+            return 10800
+        when 10
+            return 7200
+        when 11
+            return 3600
+        when 12
+            return 1800
+        when 13
+            return 900
+        when 14
+            return 600
+        when 15
+            return 300
+        else
+            return -1
+        end
+    end
+
+    #returns the night time limit in seconds
+    def night_in_secs night_timelimit
+        case night_timelimit
+        when 1
+            return 1209600
+        when 2
+            return 604800
+        when 3
+            return 432000
+        when 4
+            return 259200
+        when 5
+            return 172800
+        when 6
+            return 86400
+        when 7
+            return 43200
+        when 8
+            return 21600
+        when 9
+            return 10800
+        when 10
+            return 7200
+        when 11
+            return 3600
+        when 12
+            return 1800
+        when 13
+            return 900
+        when 14
+            return 600
+        when 15
+            return 300
+        else
+            return -1
+        end
+    end
 end

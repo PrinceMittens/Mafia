@@ -29,6 +29,7 @@ generate_table();
   <div class="panel-heading">
     <%= @user.name %>
   </div>
+  <!-- if category is new game -->
   <% if @topic.category == 1 %>
     <div class="panel-body">
       Number of Mafia: <%= @topic.num_mafia %> <br>
@@ -44,26 +45,36 @@ generate_table();
       <% end %>
       <br><br>
       Game Creator's Notes:<br> <%= @topic.content %>
+      <% if @topic.category == 1 and user_signed_in? and @topic.user_id != current_user.id %>
+        <% if @topic.has_user(current_user.id) %>
+          <form action="/topics/leave_game">
+          <p><button type="submit" class="btn btn-lg btn-danger">Leave Game</button></p>
+          <input type="hidden" name="id" value='<%= @topic.id %>' />
+          </form>
+        <% elsif @topic.num_mafia + @topic.num_town <= @topic.roster_count %>
+          <p><button type="submit" class="btn btn-lg btn-danger" disabled="disabled">Join Game</button></p>
+          
+        <% else %>
+          <form action="/topics/signup">
+          <p><button type="submit" class="btn btn-lg btn-danger">Join Game</button></p>
+          <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
+          <input type="hidden" name="user_id" value= '<%= current_user.id %>' />
+          </form>
+        <% end %>
+      <% elsif @topic.category == 1 and user_signed_in? and @topic.user_id == current_user.id %>
+        <% if @topic.num_mafia + @topic.num_town == @topic.roster_count %>
+          <form action="/topics/start_game">
+            <p><button type="submit" class="btn btn-lg btn-danger">Start Game</button></p>
+            <input type="hidden" name="id" value='<%= @topic.id %>' />
+          </form>
+        <% else %>
+          <p><button type="submit" class="btn btn-lg btn-danger" disabled="disabled">Start Game</button></p>
+        <% end %>
+      <% end %>
+
     </div>
-    <% # = link_to "Create Game", '/t/new', class: "btn btn-lg btn-danger" %>
-    <% if @topic.category == 1 and user_signed_in? and @topic.user_id != current_user.id %>
-      <% if @topic.has_user(current_user.id) %>
-        <!--%= link_to "Sign up", '/topics/signup', class: "btn btn-lg btn-danger" %-->
-      <% elsif %>
-        <!--form action="/topics/signup"-->
-        <form action="/topics/signup">
-        <p><button type="submit" class="btn btn-lg btn-danger">Join Game</button></p>
-        <input type="hidden" name="id" value='<%= request.original_url.split('/').last %>' />
-        <input type="hidden" name="user_id" value= '<%= current_user.id %>' />
-        </form>
-      <% end %>
-      <% if @topic.has_user(current_user.id) %>
-        <form action="/topics/leave_game">
-        <p><button type="submit" class="btn btn-lg btn-danger">Leave Game</button></p>
-        <input type="hidden" name="id" value='<%= @topic.id %>' />
-        </form>
-      <% end %>
-    <% end %>
+
+  <!-- if category is not new game -->
   <% elsif %>
     <div class="panel-body">
       <%= @topic.content %>
@@ -87,7 +98,6 @@ generate_table();
   <form action="../posts/create">
     <p><button type="submit" class="btn btn-primary">Reply</button></p>
     <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>' />
-    
     <fieldset class="form-group">
       <textarea class="form-control" type="text" name="content" rows="3"></textarea>
     </fieldset>
