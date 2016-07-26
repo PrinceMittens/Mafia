@@ -40,7 +40,7 @@ class PagesController < ApplicationController
         @all_user = User.all
         topic = Topic.find(params[:id])
         user = User.find(topic.user_id)
-        player = Player.where(:topic_id => topic.id, :user_id => current_user.id)
+        player = Player.find(topic.player_search_id(user.id))
         @topic = topic
         @user = user
         @posts = topic.Posts
@@ -58,10 +58,12 @@ class PagesController < ApplicationController
         elsif topic.category == 1
             render 'pages/topic'
         elsif topic.category == 2
-            if topic.phase == 0
-                @vote_list = @game_players
-            elsif topic.phase == 1 && player.affiliation == 'mafia'
-                @vote_list = @town_players
+            if topic.has_user(user.id)
+                if topic.phase == 0
+                    @vote_list = @game_players
+                elsif topic.phase == 1 && player.affiliation == 'mafia'
+                    @vote_list = @town_players
+                end
             end
             render 'pages/game'
         end
