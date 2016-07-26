@@ -110,6 +110,8 @@
             <th>Topic title</th>
             <th>Post title</th>
             <th>Post content</th>
+            <th>Post type</th>
+            <th>Hidden?</th>
             <th>[x]</th>
         </tr>
         <% @all_post.each do |x| %>
@@ -119,6 +121,8 @@
             <td><%= Topic.find(x.topic_id).title %></td>
             <td><%= x.title %></td>
             <td><%= x.content %></td>
+            <td><%= x.post_type %></td>
+            <td><%= x.hidden %></td>
             <td><a href="/admin/delete_post/<%= x.id %>">[x]</a></td>
         </tr>
         <% end %>

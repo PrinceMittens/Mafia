@@ -7,7 +7,13 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.string  :player_email
       
       t.string :role
-      t.string :affiliation
+      
+      #0 = Mafia
+      #1 = Town
+      #2 = Admin
+      #3 = TP
+      t.integer :affiliation
+      
       t.boolean :is_dead
       t.integer :vote_who
       t.integer :vote_count

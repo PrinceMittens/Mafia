@@ -101,10 +101,10 @@ class TopicsController < ApplicationController
       x.vote_count = 0
       x.vote_who = -1
       if mafia_count > 0
-        x.affiliation = 'mafia'
+        x.affiliation = 0
         mafia_count -= 1
       else
-        x.affiliation = 'town'
+        x.affiliation = 1
       end
       x.save
     end
@@ -134,7 +134,7 @@ class TopicsController < ApplicationController
       elsif phase == 1
           majority = topic.num_mafia / 2 + 1
       end
-      
+      #if phase != 1 && 
       content = player_id.to_s + " has voted for " + vote_who.to_s
       post_system_general(topic_id, content)
       
@@ -156,9 +156,9 @@ class TopicsController < ApplicationController
       
       game.num_players_alive = game.num_players_alive - 1               # keep track of number of remaining players
 
-      if dead_player.affiliation == "mafia"          # going to day phase
+      if dead_player.affiliation == 0          # going to day phase
           game.num_mafia = game.num_mafia - 1   # one town killed
-      elsif dead_player.affiliation == "town"        # going to night phase 
+      elsif dead_player.affiliation == 1        # going to night phase 
           game.num_town = game.num_town - 1
       end
       game.save

@@ -37,6 +37,63 @@ class Topic < ApplicationRecord
         return
     end
 
+    # returns player object associated with the given user id
+    # returns nil if no player with that user iD
+    # only returns non-nil if the user is a player of the game (not mod or anyone else)
+    # takes as a parameter user id
+    
+    def find_player_by_user(user_id)
+        if self.user_id == user_id
+            # This is the mod
+            return nil
+        end
+        last_registered_player_id = self.last_registered_player_id.to_i
+        if last_registered_player_id == -1
+            # no users in this game, return as appropriate
+            return nil
+        end
+        while last_registered_player_id != -1
+            curr_player = Player.find(last_registered_player_id)
+            if curr_player.user_id == user_id
+                return curr_player
+            end
+            last_registered_player_id = curr_player.prev_player_id
+        end
+        # search failed to find player in the player list
+        return nil
+    end
+
+    # returns viewing permission based on user_id
+    # returns 0 for mafia, 1 for town, 2 for mod
+    # add more as necessary
+    # returns -1 for everyone else
+    # takes user ID as a parameter
+    def user_permission(user_id)
+        if self.user_id == user_id
+            # This is the mod
+            return 2
+        end
+        last_registered_player_id = self.last_registered_player_id.to_i
+        if last_registered_player_id == -1
+            # no users in this game, return -1 as generic viewership permission
+            return -1
+        end
+        while last_registered_player_id != -1
+            curr_player = Player.find(last_registered_player_id)
+            if curr_player.user_id == user_id
+                if curr_player.affiliation == nil
+                    return -1
+                elsif curr_player.affiliation == 0
+                    return 0
+                elsif curr_player.affiliation == 1
+                    return 1
+                end
+            end
+            last_registered_player_id = curr_player.prev_player_id
+        end
+        # search failed to find player in the player list
+        return -1
+    end
     # takes as parameter a user id (not player id)
     # checks if any of the current list of players
     # associated with the game contains the specified user id

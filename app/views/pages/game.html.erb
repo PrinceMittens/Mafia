@@ -52,15 +52,29 @@ generate_table();
     <div id="home" class="tab-pane fade in active">
       <h3>Posts</h3>
       <% @posts.each do |x| %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <%= @all_user.find(x.user_id).name %>
+        <% if x.post_type == 0 && x.hidden == 1 %>
+        <% # if this is a hidden mafia post %>
+          <% if @topic.user_permission(current_user.id) == 2 || @topic.user_permission(current_user.id) == 0%>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <font face="Times" size="3"><%= @all_user.find(x.user_id).name %></font>
+                <%= '-' %>
+                <%= x.content %>
+              </div>
+            </div>
+          <% end %>
+        <% elsif x.hidden == 0 || x.post_type == -1 %>
+        <% # if not a hidden post %>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <font face="Times" size="3"><%= @all_user.find(x.user_id).name %></font>
+              <%= '-' %>
+              <%= x.content %>
+            </div>
           </div>
-          <div class="panel-body">
-            <%= x.content %>
-          </div>
-        </div>
+        <% end %>
       <% end %>
+
     
       <% if user_signed_in? %>
         <form action="../posts/create">
@@ -83,7 +97,9 @@ generate_table();
         <form action="/topics/vote">
           
           <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
-          <input type="hidden" name="player_id" value='<%= Player.where(:topic_id => @topic.id, :user_id => current_user.id).first.id %>'>
+          <% if @topic.find_player_by_user(current_user.id) != nil %>
+            <input type="hidden" name="player_id" value='<%= @topic.find_player_by_user(current_user.id).id %>'>
+          <% end %>
           <% @vote_list.each do |x| %>
             <div class="radio">
               <label>

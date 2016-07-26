@@ -197,8 +197,8 @@ class AdminController < ApplicationController
             topic = Topic.find(params[:topic_id])
             
             game_players = Player.where(:topic_id => topic.id, :is_dead => false)
-            mafia_players = Player.where(:topic_id => topic.id, :affiliation => 'mafia', :is_dead => false)
-            town_players = Player.where(:topic_id => topic.id, :affiliation => 'town', :is_dead => false)
+            mafia_players = Player.where(:topic_id => topic.id, :affiliation => 0, :is_dead => false)
+            town_players = Player.where(:topic_id => topic.id, :affiliation => 1, :is_dead => false)
 
             start_phase = topic.phase
             
@@ -207,7 +207,7 @@ class AdminController < ApplicationController
                 if start_phase == topic.phase and topic.who_won == -1
                     if topic.phase == 0
                         update_vote_general(player.id, topic.id, game_players[rand(game_players.count)].id)
-                    elsif topic.phase == 1 and player.affiliation == 'mafia'
+                    elsif topic.phase == 1 and player.affiliation == 0
                         update_vote_general(player.id, topic.id, town_players[rand(town_players.count)].id)
                     end
                 end

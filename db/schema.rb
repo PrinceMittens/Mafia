@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 20160717231526) do
     t.integer  "topic_id"
     t.string   "player_email"
     t.string   "role"
-    t.string   "affiliation"
+    t.integer  "affiliation"
     t.boolean  "is_dead"
     t.integer  "vote_who"
     t.integer  "vote_count"
@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 20160717231526) do
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "topic_id"
+    t.integer  "post_type"
+    t.integer  "hidden"
     t.string   "title"
     t.text     "content"
     t.datetime "created_at", null: false

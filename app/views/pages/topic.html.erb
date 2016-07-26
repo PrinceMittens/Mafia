@@ -84,10 +84,9 @@ generate_table();
 
 <% @posts.each do |x| %>
   <div class="panel panel-default">
-    <div class="panel-heading">
-      <%= @all_user.find(x.user_id).name %>
-    </div>
     <div class="panel-body">
+      <font face="Times" size="3"><%= @all_user.find(x.user_id).name %></font>
+      <%= '-' %>
       <%= x.content %>
     </div>
   </div>

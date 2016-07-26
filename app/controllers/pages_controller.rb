@@ -45,8 +45,8 @@ class PagesController < ApplicationController
         @posts = topic.Posts
         
         @game_players = Player.where(:topic_id => topic.id, :is_dead => false)
-        @mafia_players = Player.where(:topic_id => topic.id, :affiliation => 'mafia', :is_dead => false)
-        @town_players = Player.where(:topic_id => topic.id, :affiliation => 'town', :is_dead => false)
+        @mafia_players = Player.where(:topic_id => topic.id, :affiliation => 0, :is_dead => false)
+        @town_players = Player.where(:topic_id => topic.id, :affiliation => 1, :is_dead => false)
         @vote_list = Array.new
         
 
@@ -61,7 +61,7 @@ class PagesController < ApplicationController
                 player = Player.where(:topic_id => topic.id, :user_id => current_user.id).first
                 if topic.phase == 0
                     @vote_list = @game_players
-                elsif topic.phase == 1 && player.affiliation == 'mafia'
+                elsif topic.phase == 1 && player.affiliation == 0
                     @vote_list = @town_players
                 end
             end
