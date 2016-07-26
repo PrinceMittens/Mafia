@@ -75,11 +75,11 @@ generate_table();
       <h3>Vote For</h3>
       
       
-      <% if Topic.find(@topic.id).has_user(current_user.id) %>
+     
         <form action="/topics/vote">
           
           <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
-          <input type="hidden" name="player_id" value='<%= Topic.find(@topic.id).player_search_id(current_user.id).id %>'>
+          <input type="hidden" name="player_id" value='<%= Player.where(:topic_id => @topic.id, :user_id => current_user.id).first.id %>'>
           <% @vote_list.each do |x| %>
             <div class="radio">
               <label>
@@ -90,7 +90,7 @@ generate_table();
           <% end %>
           <p><button type="submit" class="btn btn-primary">Vote</button></p>
         </form>
-      <% end %>
+     
     
     </div>
     

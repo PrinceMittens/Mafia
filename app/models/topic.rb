@@ -46,7 +46,7 @@ class Topic < ApplicationRecord
     def has_user(user_id)
         if self.user_id == user_id
             puts 'You are the mod!'
-            return true
+            return false
         end
         last_registered_player_id = self.last_registered_player_id.to_i
         if last_registered_player_id == -1
