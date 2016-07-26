@@ -29,10 +29,11 @@ generate_table();
     <%= 'Player Count: ' + @topic.roster_count.to_s %>
   </div>
   <div class="panel-body">
-    <% if @topic.phase.to_i == 1 %>
-    <%= 'Day Phase: ' + @topic.day_timelimit.to_s %>
+    <% if @topic.phase.to_i == 0 %>
+      <%= 'Day Phase: ' + @topic.day_timelimit.to_s %>
     <% else %>
-    <%= 'Night Phase: ' + @topic.night_timelimit.to_s %>
+      <%= 'Night Phase: ' + @topic.night_timelimit.to_s %>
+    <% end %>
   </div>
 </div>
 
