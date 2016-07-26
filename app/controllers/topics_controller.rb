@@ -164,7 +164,7 @@ class TopicsController < ApplicationController
       game.save
       
       
-      content = "Player " + User.find(dead_player.id).name + " died. End of phase, changed to " + game.phase.to_s + ". Number of mafia: " + game.num_mafia.to_s + ". Number of town: " + game.num_town.to_s + "."
+      content = "Player " + User.find(dead_player.user_id).name + " died. End of phase, changed to " + game.phase.to_s + ". Number of mafia: " + game.num_mafia.to_s + ". Number of town: " + game.num_town.to_s + "."
       post_system_general(topic_id, content)
       
       game_players = Player.where(:topic_id => topic_id, :is_dead => false)
