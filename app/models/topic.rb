@@ -90,7 +90,8 @@ class Topic < ApplicationRecord
         end
     end
     
-    # function for searching through the roster by user id
+    # function for searching through the roster
+    # takes a player ID value as a parameter
     # returns the player object
     # returns nil if index is nonexistent, meaning no players in game yet
 
