@@ -134,8 +134,11 @@ class TopicsController < ApplicationController
       elsif phase == 1
           majority = topic.num_mafia / 2 + 1
       end
-      #if phase != 1 && 
-      content = player_id.to_s + " has voted for " + vote_who.to_s
+      if phase == 0
+        content = player_id.to_s + " has voted for " + vote_who.to_s
+      elsif phase == 1
+        content = "Mafia has selected a target"
+      end
       post_system_general(topic_id, content)
       
       if player_voted.vote_count >= majority
@@ -197,11 +200,12 @@ class TopicsController < ApplicationController
   end
   
   def post_system_general topic_id, content
-      new_post = Post.new
-      new_post.user_id = Topic.find(topic_id).user_id
-      new_post.topic_id = topic_id
-      new_post.content = content
+    topic = Topic.find(topic_id)
+    user_id = topic.user_id
+    new_post = Post.create_post(topic_id, content, user_id)
+    if new_post.content != nil
       new_post.save
+    end
   end
   
       
@@ -215,7 +219,9 @@ class TopicsController < ApplicationController
       player_id = params[:id]
       player_to_del = Player.find(player_id)
       topic = Topic.find(player_to_del.topic_id)
-      topic.del_player(player_to_del.id) == -1
+      if topic.del_player(player_to_del.id) == -1
+        ERROR GARBAGE STUFF
+      end
       redirect_to admin_path
   end
   
