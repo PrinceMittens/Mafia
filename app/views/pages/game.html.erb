@@ -98,7 +98,7 @@ generate_table();
       
      
         <form action="/topics/vote">
-          <% if @topic.find_player_by_user(current_user.id) != nil && @player.vote_who == -1 %>
+          <% if @topic.find_player_by_user(current_user.id) != nil && @player.vote_who == -1 && @player.is_dead == false %>
             <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
             <% if current_user != nil && @topic.find_player_by_user(current_user.id) != nil %>
               <input type="hidden" name="player_id" value='<%= @topic.find_player_by_user(current_user.id).id %>'>
