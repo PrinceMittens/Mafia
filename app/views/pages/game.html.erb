@@ -1,3 +1,4 @@
+<% if false %>
 <div id="mySidenav2" class="sidenav">
   <a></a><a></a><a></a>
   <a href="javascript:void(0)" onclick="openNav()">Vote here!</a>
@@ -21,7 +22,7 @@ var yourvote = -1;
 document.getElementById("mySidenav2").style.width = "100px";
 generate_table();
 </script>
-
+<% end %>
 <p>Thread : <%= @topic.title %></p>
 
 <div class="panel panel-default">
@@ -30,9 +31,9 @@ generate_table();
   </div>
   <div class="panel-body">
     <% if @topic.phase.to_i == 0 %>
-      <%= 'Day Phase: ' + @topic.day_timelimit.to_s %>
+      <%= 'Day Phase' %>
     <% else %>
-      <%= 'Night Phase: ' + @topic.night_timelimit.to_s %>
+      <%= 'Night Phase' %>
     <% end %>
   </div>
 </div>
