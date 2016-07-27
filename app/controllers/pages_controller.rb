@@ -60,6 +60,7 @@ class PagesController < ApplicationController
             if current_user != nil
                 if topic.has_user(current_user.id)
                     player = Player.where(:topic_id => topic.id, :user_id => current_user.id).first
+                    @player = player
                     if topic.phase == 0
                         @vote_list = @game_players
                     elsif topic.phase == 1 && player.affiliation == 0

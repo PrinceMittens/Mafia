@@ -188,7 +188,7 @@ class TopicsController < ApplicationController
   def game_end_general topic_id, who_won
       topic = Topic.find(topic_id)
       topic.who_won = who_won
-      topic.category = 2
+      topic.category = 3
       topic.save
       if who_won == 1
           content = "The game has ended! Town won"
