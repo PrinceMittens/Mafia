@@ -173,6 +173,7 @@ class TopicsController < ApplicationController
       game_players = Player.where(:topic_id => topic_id, :is_dead => false)
       game_players.each do |player|
            player.vote_count = 0
+           player.vote_who = -1
            player.save
       end
       
