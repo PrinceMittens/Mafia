@@ -135,7 +135,7 @@ class TopicsController < ApplicationController
           majority = topic.num_mafia / 2 + 1
       end
       if phase == 0
-        content = Player.find(player_id).player_email + " has voted for " + Player.find(vote_who).player_email
+        content = User.find(Player.find(player_id).user_id).name + " has voted for " + User.find(Player.find(vote_who).user_id).name
       elsif phase == 1
         content = "Mafia has selected a target"
       end
