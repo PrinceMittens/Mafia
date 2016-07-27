@@ -54,7 +54,9 @@ generate_table();
       <% @posts.each do |x| %>
         <% if x.post_type == 0 && x.hidden == 1 %>
         <% # if this is a hidden mafia post %>
-          <% if @topic.user_permission(current_user.id) == 2 || @topic.user_permission(current_user.id) == 0%>
+          <% if current_user.id == nil %>
+            <% #NothinG! %>
+          <% elsif @topic.user_permission(current_user.id) == 2 || @topic.user_permission(current_user.id) == 0%>
             <div class="panel panel-default">
               <div class="panel-body">
                 <font face="Times" size="3"><%= @all_user.find(x.user_id).name %></font>
@@ -97,7 +99,7 @@ generate_table();
         <form action="/topics/vote">
           
           <input type="hidden" name="topic_id" value='<%= request.original_url.split('/').last %>'/>
-          <% if @topic.find_player_by_user(current_user.id) != nil %>
+          <% if current_user != nil && @topic.find_player_by_user(current_user.id) != nil %>
             <input type="hidden" name="player_id" value='<%= @topic.find_player_by_user(current_user.id).id %>'>
           <% end %>
           <% @vote_list.each do |x| %>

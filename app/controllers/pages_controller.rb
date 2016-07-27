@@ -57,12 +57,14 @@ class PagesController < ApplicationController
         elsif topic.category == 1
             render 'pages/topic'
         elsif topic.category == 2
-            if topic.has_user(current_user.id)
-                player = Player.where(:topic_id => topic.id, :user_id => current_user.id).first
-                if topic.phase == 0
-                    @vote_list = @game_players
-                elsif topic.phase == 1 && player.affiliation == 0
-                    @vote_list = @town_players
+            if current_user != nil
+                if topic.has_user(current_user.id)
+                    player = Player.where(:topic_id => topic.id, :user_id => current_user.id).first
+                    if topic.phase == 0
+                        @vote_list = @game_players
+                    elsif topic.phase == 1 && player.affiliation == 0
+                        @vote_list = @town_players
+                    end
                 end
             end
             render 'pages/game'
