@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(version: 20160717231526) do
     t.integer  "user_id"
     t.integer  "topic_id"
     t.string   "player_email"
+    t.string   "player_name"
     t.string   "role"
     t.integer  "affiliation"
     t.boolean  "is_dead"

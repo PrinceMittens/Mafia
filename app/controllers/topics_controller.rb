@@ -119,14 +119,28 @@ class TopicsController < ApplicationController
   
   # to update player table when someone votes
   def update_vote_general player_id, topic_id, vote_target_player_id
-      player_voter = Player.find(player_id)
-      player_voter.vote_target_player_id = vote_target_player_id
-      player_voter.save
+      voting_player = Player.find(player_id)
       player_voted = Player.find(vote_target_player_id)
-      player_voted.vote_count += 1
-      player_voted.save
-      
+      curr_voted = Player.find(voting_player.vote_target_player_id)
       topic = Topic.find(topic_id)
+      
+      #if vote was already cast on the target, do nothing
+      if voting_player.vote_target_player_id == player_voted.id
+        return
+      #if vote not cast before
+      elsif voting_player.vote_target_player_id == -1
+        voting_player.vote_target_player_id = vote_target_player_id
+        player_voted.vote_count += 1
+      #if vote has already been cast on someone else
+      elsif voting_player.vote_target_player_id != -1
+        curr_voted.vote_count -= 1
+        player_voted.vote_count += 1
+        voting_player.vote_target_player_id = vote_target_player_id
+      end
+      player_voted.save
+      voting_player.save
+      curr_voted.save
+
       phase = topic.phase
       majority = 0
       if phase == 0
@@ -134,11 +148,20 @@ class TopicsController < ApplicationController
       elsif phase == 1
           majority = topic.num_mafia / 2 + 1
       end
-      if phase == 0
-        content = User.find(Player.find(player_id).user_id).name + " has voted for " + User.find(Player.find(vote_target_player_id).user_id).name
-      elsif phase == 1
-        content = "Mafia has selected a target"
+      if voting_player.affiliation == 0
+        if phase == 0
+          content = voting_player.player_name + " has voted for " + player_voted.player_name
+        elsif phase == 1
+          content = "Mafia has selected a target"
+        end
+      elsif voting_player.affiliation == 1
+        if phase == 0
+          content = voting_player.player_name + " has voted for " + player_voted.player_name
+        elsif phase == 1
+          #change content based on player role here
+        end
       end
+      
       post_system_general(topic_id, content)
       
       if player_voted.vote_count >= majority

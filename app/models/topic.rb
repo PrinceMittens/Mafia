@@ -10,7 +10,9 @@ class Topic < ApplicationRecord
     # no return value
 
     def create_player curr_user_id
+        curr_user = Player.find(curr_user_id)
         new_player = Player.new
+        new_player.player_name = curr_user.name
         new_player.user_id = curr_user_id
         new_player.player_email = User.find(new_player.user_id).email
         new_player.prev_player_id = new_player.next_player_id = -1

@@ -148,7 +148,7 @@ generate_table();
       <div class="panel-body">
         <% if @topic.phase == 0 %>
           <%= 'Vote Count: ' + roster_p.vote_count.to_s %>
-          <%= 'Voted For: ' + @all_user.find(@all_player.find(roster_p.vote_target_player_id).user_id).name %>
+          <%= 'Voted For: ' + @all_player.find(roster_p.vote_target_player_id).player_name %>
         <% end %>  
       </div>
     </div>

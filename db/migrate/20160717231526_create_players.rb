@@ -5,6 +5,7 @@ class CreatePlayers < ActiveRecord::Migration[5.0]
       t.integer :user_id
       t.integer :topic_id
       t.string  :player_email
+      t.string  :player_name
       
       t.string :role
       
