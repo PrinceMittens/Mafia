@@ -19,12 +19,12 @@ ActiveRecord::Schema.define(version: 20160717231526) do
     t.string   "role"
     t.integer  "affiliation"
     t.boolean  "is_dead"
-    t.integer  "vote_who"
+    t.integer  "vote_target_player_id"
     t.integer  "vote_count"
     t.integer  "next_player_id"
     t.integer  "prev_player_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
   end
 
   create_table "posts", force: :cascade do |t|

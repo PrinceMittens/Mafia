@@ -99,7 +99,7 @@ class TopicsController < ApplicationController
     players.each do |x|
       x.is_dead = false
       x.vote_count = 0
-      x.vote_who = -1
+      x.vote_target_player_id = -1
       if mafia_count > 0
         x.affiliation = 0
         mafia_count -= 1
@@ -118,11 +118,11 @@ class TopicsController < ApplicationController
   ## general functions for game flow
   
   # to update player table when someone votes
-  def update_vote_general player_id, topic_id, vote_who
+  def update_vote_general player_id, topic_id, vote_target_player_id
       player_voter = Player.find(player_id)
-      player_voter.vote_who = vote_who
+      player_voter.vote_target_player_id = vote_target_player_id
       player_voter.save
-      player_voted = Player.find(vote_who)
+      player_voted = Player.find(vote_target_player_id)
       player_voted.vote_count += 1
       player_voted.save
       
@@ -135,7 +135,7 @@ class TopicsController < ApplicationController
           majority = topic.num_mafia / 2 + 1
       end
       if phase == 0
-        content = User.find(Player.find(player_id).user_id).name + " has voted for " + User.find(Player.find(vote_who).user_id).name
+        content = User.find(Player.find(player_id).user_id).name + " has voted for " + User.find(Player.find(vote_target_player_id).user_id).name
       elsif phase == 1
         content = "Mafia has selected a target"
       end
@@ -173,7 +173,7 @@ class TopicsController < ApplicationController
       game_players = Player.where(:topic_id => topic_id, :is_dead => false)
       game_players.each do |player|
            player.vote_count = 0
-           player.vote_who = -1
+           player.vote_target_player_id = -1
            player.save
       end
       
@@ -227,7 +227,7 @@ class TopicsController < ApplicationController
   end
   
   def vote
-      update_vote_general(params[:player_id], params[:topic_id], params[:vote_who])
+      update_vote_general(params[:player_id], params[:topic_id], params[:vote_target_player_id])
       redirect_to '/t/' + params[:topic_id]
   end
 end

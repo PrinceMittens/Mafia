@@ -88,11 +88,11 @@ class AdminController < ApplicationController
     end
     
     # to update player table when someone votes
-    def update_vote_general player_id, topic_id, vote_who
+    def update_vote_general player_id, topic_id, vote_target_player_id
         player_voter = Player.find(player_id)
-        player_voter.vote_who = vote_who
+        player_voter.vote_target_player_id = vote_target_player_id
         player_voter.save
-        player_voted = Player.find(vote_who)
+        player_voted = Player.find(vote_target_player_id)
         player_voted.vote_count += 1
         player_voted.save
         
@@ -105,7 +105,7 @@ class AdminController < ApplicationController
             majority = topic.num_mafia / 2 + 1
         end
         
-        content = player_id.to_s + " has voted for " + vote_who.to_s
+        content = player_id.to_s + " has voted for " + vote_target_player_id.to_s
         post_system_general(topic_id, content)
         
         if player_voted.vote_count >= majority

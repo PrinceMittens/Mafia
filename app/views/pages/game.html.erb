@@ -106,7 +106,7 @@ generate_table();
             <% @vote_list.each do |x| %>
               <div class="radio">
                 <label>
-                  <input type="radio" name="vote_who" id="optionsRadios1" value= <%= x.id %>>
+                  <input type="radio" name="vote_target_player_id" id="optionsRadios1" value= <%= x.id %>>
                   <%= User.find(x.user_id).name %> (Current vote count: <%= x.vote_count %>)
                 </label>
               </div>
@@ -148,7 +148,7 @@ generate_table();
       <div class="panel-body">
         <% if @topic.phase == 0 %>
           <%= 'Vote Count: ' + roster_p.vote_count.to_s %>
-          <%= 'Voted For: ' + @all_user.find(@all_player.find(roster_p.vote_who).user_id).name %>
+          <%= 'Voted For: ' + @all_user.find(@all_player.find(roster_p.vote_target_player_id).user_id).name %>
         <% end %>  
       </div>
     </div>
