@@ -121,7 +121,6 @@ class TopicsController < ApplicationController
   def update_vote_general player_id, topic_id, vote_target_player_id
       voting_player = Player.find(player_id)
       player_voted = Player.find(vote_target_player_id)
-      curr_voted = Player.find(voting_player.vote_target_player_id)
       topic = Topic.find(topic_id)
       
       #if vote was already cast on the target, do nothing
@@ -133,13 +132,14 @@ class TopicsController < ApplicationController
         player_voted.vote_count += 1
       #if vote has already been cast on someone else
       elsif voting_player.vote_target_player_id != -1
+        curr_voted = Player.find(voting_player.vote_target_player_id)
         curr_voted.vote_count -= 1
         player_voted.vote_count += 1
         voting_player.vote_target_player_id = vote_target_player_id
+        curr_voted.save
       end
       player_voted.save
       voting_player.save
-      curr_voted.save
 
       phase = topic.phase
       majority = 0
